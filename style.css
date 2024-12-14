@@ -1,0 +1,66 @@
+body {
+   margin: 0; padding: 0;
+   background-image: url(img/46bd986038ce.png);
+}
+h1, h2, h3 {
+   margin: 0; padding: 0;
+}
+input[type=text], textarea{
+   resize: none;
+   width: 100%;
+   background-color: #e2d6ca;
+   color: #241205;
+   margin-top: 5px;
+   border: none; border-bottom: #241205 2px solid;
+   padding: 5px;
+}
+select, option {
+   background-color: #e2d6ca;
+   color: #241205;
+   margin-top: 5px;
+   border: none; border-bottom: #241205 2px solid;
+   padding: 5px;
+}
+img {
+   margin-bottom: 20px;
+}
+
+.main {
+   border-left: solid 20px transparent; border-right: solid 20px transparent;
+   border-top: solid 10px transparent; border-bottom: solid 10px transparent;
+   border-image: linear-gradient(#1e1913 , #3e2d25); 
+   border-image-slice: 1; 
+   width: 75%; margin: auto;
+   margin-top: 20px;
+   background-color: #e5c2a2c4;
+   padding: 5px; padding-top: 0; padding-bottom: 25px;
+   display: flex; flex-direction: column; justify-content: space-around; align-items: center
+}
+
+.contaner {
+   width: 95%; margin: auto;
+   display: flex; flex-direction: row; justify-content: space-around; align-items: center
+}
+.contaner div {
+   width: 30%;
+}
+.contaner button {
+   width: 100%;
+   background-color: #e2d6ca;
+   color: #241205;
+   margin-top: 5px;
+   border: 2px solid transparent; border-bottom: #241205 2px solid;
+   padding: 5px;
+}
+.contaner button:hover {
+   background-color: #c4986e;
+   border:#241205 2px solid;
+   transform: scale(110%);
+}
+
+div#pat-report {
+   display: flex; flex-direction: column;
+}
+div#pat-report label {
+   margin-bottom: 5px;
+}

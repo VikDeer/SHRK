@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Отчеты</title>
+   <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<div class="main">
+   <img src="img/logo.png">
+<div class="contaner patrol"><h2>Лагерный патруль</h2>
+   <div id="pat-report">
+      <label>Время сбора: <select id="time"></select><input id ='another-time' type="text" placeholder="Другое время"></label>
+      <label>Собирающий: <input id='collect' type='text' placeholder="1568535"></label>
+      <label>Ведущий(ие): <input id="leader" type="text" placeholder="1568535 1629378"></label>
+      <label id="party-label">Участники: <input id='part' type="text" placeholder="1568535 1629378 2410"></label>
+      <button id="pat-ok">Составить отчет</button>
+   </div>
+   <div>
+   <textarea id="pat-report-rez"></textarea>
+   <button id="pat-copy">Скопировать отчет</button>
+   </div>
+   <!-- <div id="pat-report-rez">
+      <b>[b]Дата проведения лагерного патруля:[/b]</b> <span id="data"></span><br>
+      <b>[b]Отчёт о проведении лагерного патруля:[/b]</b><br>
+      <b>[b]Время сбора:[/b]</b> <span id="timing"></span><br>
+      <b>[b]Собирающий:[/b]</b> <span id="collecting"></span><br>
+      <b>[b]Ведущий(ие):[/b]</b> <span id="leading"></span><br>
+      <b>[b]Участники:[/b]</b> <span id="party"></span><br>
+      <b>[b]Нарушители:[/b]</b> -
+   </div> -->
+</div>
+</div>
+
+<script src="отчеты.js"></script>
+</body>
+</html>
