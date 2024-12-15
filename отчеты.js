@@ -50,7 +50,7 @@ function makePat() {
       
       let patIntruder = '[b]Нарушители:[/b] -'
 
-      patReport.value = `${patData}\n${patTime}\n${patCollecting}\n${patLeading}\n${patParty}\n${patIntruder}`
+      patReport.value = `${patData}\n[b]Отчёт о проведении лагерного патруля:[/b]\n${patTime}\n${patCollecting}\n${patLeading}\n${patParty}\n${patIntruder}`
 
       patReport.style.height = 'auto';
       patReport.style.height = `${patReport.scrollHeight}px`;
