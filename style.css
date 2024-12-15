@@ -24,6 +24,13 @@ select, option {
 img {
    margin-bottom: 20px;
 }
+hr {
+   margin-top: 25px; margin-bottom: 25px;
+   height: 2px; width: 100%;
+   border: none;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+}
 
 .main {
    border-left: solid 20px transparent; border-right: solid 20px transparent;
@@ -31,7 +38,7 @@ img {
    border-image: linear-gradient(#1e1913 , #3e2d25); 
    border-image-slice: 1; 
    width: 75%; margin: auto;
-   margin-top: 20px;
+   margin-top: 20px; margin-bottom: 20px;
    background-color: #e5c2a2c4;
    padding: 5px; padding-top: 0; padding-bottom: 25px;
    display: flex; flex-direction: column; justify-content: space-around; align-items: center
@@ -39,10 +46,10 @@ img {
 
 .contaner {
    width: 95%; margin: auto;
-   display: flex; flex-direction: row; justify-content: space-around; align-items: center
-}
-.contaner div {
-   width: 30%;
+   display: grid; grid-template-columns: repeat(3, 1fr);
+   justify-items: center;
+   gap: 30px;
+   /* display: flex; flex-direction: row; justify-content: space-around; align-items: center */
 }
 .contaner button {
    width: 100%;
@@ -58,9 +65,9 @@ img {
    transform: scale(110%);
 }
 
-div#pat-report {
+div.report {
    display: flex; flex-direction: column;
 }
-div#pat-report label {
+div.report label {
    margin-bottom: 5px;
 }
