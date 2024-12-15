@@ -59,7 +59,44 @@ function makePat() {
 
 patOK.onclick = makePat;
 
-patCopy.onclick = function() {
-   patReport.select()
-   document.execCommand("copy");
+let watchStart = document.getElementById('watch-start')
+let watchEnd = document.getElementById('watch-end')
+let whatcherIn = document.getElementById('watcher-input')
+let watchPathIn = document.getElementById('watch-path')
+let watchOK = document.getElementById('watch-ok')
+let watchReport = document.getElementById('watch-rep-rez')
+let watchCopy = document.getElementById('watch-copy')
+
+function makeWhatch() {
+   let allCompete
+   if (watchStart.value && watchEnd.value && whatcherIn.value) {
+      allCompete = true;
+   } else { alert('Заполни всё!')}
+   
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      let watchData = `[b]Дата проведения лагерного дозора:[/b] ${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+
+      let watchHours = `[b]Часы дозора:[/b] ${watchStart.value} - ${watchEnd.value}`
+
+      let watcher = `[b]Дозорный:[/b] [link${whatcherIn.value}] [${whatcherIn.value}]`
+
+      let watchPath = `[b]Маршрут:[/b] ${watchPathIn.value}`
+
+      watchReport.value = `${watchData}\n[b]Отчёт о проведении лагерного дозора:[/b]\n${watchHours}\n${watcher}\n${watchPath}\n[b]Нарушители:[/b] -`
+
+      watchReport.style.height = 'auto';
+      watchReport.style.height = `${watchReport.scrollHeight}px`;
+   }
 }
+
+watchOK.onclick = makeWhatch;
+
+let copyReport = function() {
+   this.select();
+   document.execCommand("copy")
+}
+
+patCopy.onclick = copyReport.bind(patReport)
+watchCopy.onclick = copyReport.bind(watchReport)
