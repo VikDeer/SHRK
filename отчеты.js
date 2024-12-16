@@ -1,13 +1,8 @@
 let patCollect = document.getElementById('collect');
-let patCollecting //= document.getElementById('collecting')
 let patLeader = document.getElementById('leader');
-let patLeading //= document.getElementById('leading')
 let patPart = document.getElementById('part');
-let patParty //= document.getElementById('party')
 let patOK = document.getElementById('pat-ok')
 let patCopy = document.getElementById('pat-copy')
-let patData //= document.getElementById('data');
-let patTime //= document.getElementById('timing')
 let timeSelect = document.getElementById('time')
 let patReport = document.getElementById('pat-report-rez')
 
