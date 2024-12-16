@@ -93,6 +93,46 @@ function makeWhatch() {
 
 watchOK.onclick = makeWhatch;
 
+let lecStart = document.getElementById('lec-time')
+let lecerIn = document.getElementById('lec-id')
+let lecType = document.getElementById('lec-type')
+let lecParty = document.getElementById('lec-party')
+let lecOK = document.getElementById('lec-ok')
+let lecReport = document.getElementById('lec-rep-rez')
+let lecCopy = document.getElementById('lec-copy')
+
+function makeLec() {
+   let allCompete
+   if (lecStart.value && lecerIn.value && lecType.value && lecParty.value) {
+      allCompete = true;
+   } else { alert('Заполни всё!')}
+   
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      let lecData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)} | ${lecStart.value}[/b]`
+
+      let lector = `[b]Ведущий:[/b] [link${lecerIn.value}] [${lecerIn.value}]`
+
+      let theme = `[b]Тема лекции:[/b] ${lecType.value}`
+
+      let party = lecParty.value.split(' ')
+      let players = ''
+      for (j = 0; j < party.length; j++) {
+         let arr = party[j].split('+')
+         players = players + `[link${arr[0]}] [${arr[0]}] (+${arr[1]} монет) `
+      }
+      players = `[b]Участники:[/b] ${players}`
+
+      lecReport.value = `${lecData}\n[b]Отчёт о проведённой лекции:[/b]\n${lector}\n${theme}\n${players}`
+
+      lecReport.style.height = 'auto';
+      lecReport.style.height = `${lecReport.scrollHeight}px`;
+   }
+}
+
+lecOK.onclick = makeLec
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
@@ -100,3 +140,4 @@ let copyReport = function() {
 
 patCopy.onclick = copyReport.bind(patReport)
 watchCopy.onclick = copyReport.bind(watchReport)
+lecCopy.onclick = copyReport.bind(lecReport)
