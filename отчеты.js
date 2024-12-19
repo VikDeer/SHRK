@@ -43,7 +43,7 @@ function makePat() {
          patParty = patParty + ', [link' + patPartys[j] + '] [' + patPartys[j] + ']'
       }
       
-      let patIntruder = '[b]Нарушители:[/b] ─'
+      let patIntruder = '[b]Нарушители:[/b] -'
 
       patReport.value = `${patData}\n[b]Отчёт о проведении лагерного патруля:[/b]\n${patTime}\n${patCollecting}\n${patLeading}\n${patParty}\n${patIntruder}`
 
@@ -79,7 +79,7 @@ function makeWhatch() {
 
       let watchPath = `[b]Маршрут:[/b] ${watchPathIn.value}`
 
-      watchReport.value = `${watchData}\n[b]Отчёт о проведении лагерного дозора:[/b]\n${watchHours}\n${watcher}\n${watchPath}\n[b]Нарушители:[/b] ─`
+      watchReport.value = `${watchData}\n[b]Отчёт о проведении лагерного дозора:[/b]\n${watchHours}\n${watcher}\n${watchPath}\n[b]Нарушители:[/b] -`
 
       watchReport.style.height = 'auto';
       watchReport.style.height = `${watchReport.scrollHeight}px`;
@@ -90,17 +90,29 @@ watchOK.onclick = makeWhatch;
 
 let lecStart = document.getElementById('lec-time')
 let lecerIn = document.getElementById('lec-id')
-let lecType = document.getElementById('lec-type')
 let lecParty = document.getElementById('lec-party')
 let lecOK = document.getElementById('lec-ok')
 let lecReport = document.getElementById('lec-rep-rez')
 let lecCopy = document.getElementById('lec-copy')
+let typeLec = document.getElementById('lec-sel'); let typeSt = document.getElementById('st-sel')
+let nameLec = document.getElementById('lec-name'); let nameSt = document.getElementById('st-name')
+
+let lecNames = ['Основы охоты', "Правила и кодекс", "Чрезвычайные ситуации", "Посвящения и тесты", "Боережим", "Жизнь малышей", "Территория", "Иерархия", "Техподдержка и АМС", "Ныряние и лазанье"]
+let lections = []
+for (let i = 0; i < lecNames.length; i++) {
+   lections[i] = document.createElement('option')
+   lections[i].value = lecNames[i]
+   lections[i].textContent = lecNames[i]
+   nameLec.append(lections[i])
+}
 
 function makeLec() {
    let allCompete
-   if (lecStart.value && lecerIn.value && lecType.value && lecParty.value) {
+   if (lecStart.value && lecerIn.value && lecParty.value) {
+      if (typeLec.checked || (typeSt.checked && nameSt.value)) {
       allCompete = true;
-   } else { alert('Заполни всё!')}
+      }
+   }
    
    if (allCompete) {
       let data = new Date;
@@ -109,7 +121,12 @@ function makeLec() {
 
       let lector = `[b]Ведущий:[/b] [link${lecerIn.value}] [${lecerIn.value}]`
 
-      let theme = `[b]Тема лекции:[/b] ${lecType.value}`
+      let theme
+      if (typeLec.checked) {
+         theme = `[b]Тема лекции:[/b] ${nameLec.value}`
+      } else if (typeSt.checked) {
+         theme = `[b]Тема сказки:[/b] ${nameSt.value}`
+      }
 
       let party = lecParty.value.split(' ')
       let players = ''
@@ -123,8 +140,26 @@ function makeLec() {
 
       lecReport.style.height = 'auto';
       lecReport.style.height = `${lecReport.scrollHeight}px`;
+   } else { alert('Заполни всё!') }
+}
+
+let hidLec = document.querySelectorAll('.hidden.lec')
+
+function displayLec() {
+   for (j = 0; j < hidLec.length; j++) {
+      hidLec[j].classList.remove('hidden')
+   }
+   if (this == 'сказка') {
+      nameSt.classList.remove('hidden')
+      nameLec.classList.add('hidden')
+   } else if (this == 'лекция') {
+      nameLec.classList.remove('hidden')
+      nameSt.classList.add('hidden')
    }
 }
+
+typeLec.onclick = displayLec.bind(typeLec.value)
+typeSt.onclick = displayLec.bind(typeSt.value)
 
 lecOK.onclick = makeLec
 
