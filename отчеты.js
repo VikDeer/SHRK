@@ -176,6 +176,59 @@ typeSt.onclick = displayLec.bind(typeSt.value)
 
 lecOK.onclick = makeLec
 
+let vpatCollect = document.getElementById('v-collect');
+let vpatLeader = document.getElementById('v-leader');
+let vpatPart = document.getElementById('v-part');
+let vpatOK = document.getElementById('v-pat-ok')
+let vpatCopy = document.getElementById('v-pat-copy')
+let vtimeSelect = document.getElementById('v-time')
+let vpatReport = document.getElementById('v-pat-report-rez')
+
+let vtimeOptions = ['1:00', '3:30', '5:00', '7:00', '9:00', '11:00', '13:00', '15:00', '19:00', '21:00', '23:00'];
+let vtimeOption = []
+let vtimeText = document.getElementById('v-another-time')
+for (let i = 0; i < vtimeOptions.length; i++) {
+   vtimeOption[i] = document.createElement('option')
+   vtimeOption[i].textContent = vtimeOptions[i]
+   vtimeOption[i].value = vtimeOptions[i]
+   vtimeSelect.append(vtimeOption[i])
+}
+
+function vmakePat() {
+   let allCompete
+   if (vpatPart.value && vpatCollect.value && vpatLeader.value) {
+      allCompete = true;
+   } else { alert('Заполни всё!')}
+   
+   if (allCompete) {
+      vpatLeading = ''; vpatParty = ''
+      let data = new Date;
+      let month = data.getMonth() + 1
+      vpatData = '[b]' + data.getDate() + '.' + month + '.' + data.getFullYear().toString().substr(2,2) + '[/b]';
+      
+      vpatTime = 'Время сбора: ' + vtimeSelect.value
+      
+      vpatCollecting = 'Собирающий: [link' + vpatCollect.value + '] [' + vpatCollect.value + ']'
+      
+      let vpatLeaders = vpatLeader.value.split(' ')
+      vpatLeading = 'Ведущий: [link' + vpatLeaders[0] + '] [' + vpatLeaders[0] + ']'
+      if (vpatLeaders[1]) {vpatLeading = vpatLeading + ', [link' + vpatLeaders[1] + '] [' + vpatLeaders[1] + ']'}
+
+      let vpatPartys = vpatPart.value.split(' ')
+      vpatParty = 'Участники: [link' + vpatPartys[0] + '] [' + vpatPartys[0] + ']'
+      for (let j = 1; j < vpatPartys.length; j++) {
+         vpatParty = vpatParty + ', [link' + vpatPartys[j] + '] [' + vpatPartys[j] + ']'
+      }
+      
+      vpatReport.value = `[b]Отчёт о пограничном патруле.[/b]\n${vpatData}\n${vpatTime}\n${vpatCollecting}\n${vpatLeading}\n${vpatParty}`
+
+      vpatReport.style.height = 'auto';
+      vpatReport.style.height = `${vpatReport.scrollHeight}px`;
+   }
+}
+
+vpatOK.onclick = vmakePat;
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
@@ -184,3 +237,4 @@ let copyReport = function() {
 patCopy.onclick = copyReport.bind(patReport)
 watchCopy.onclick = copyReport.bind(watchReport)
 lecCopy.onclick = copyReport.bind(lecReport)
+vpatCopy.onclick = copyReport.bind(vpatReport)
