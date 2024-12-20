@@ -130,13 +130,24 @@ function makeLec() {
 
       let party = lecParty.value.split(' ')
       let players = ''
+      if (typeLec.checked) {
       for (j = 0; j < party.length; j++) {
          let arr = party[j].split('+')
          players = players + `[link${arr[0]}] [${arr[0]}] (+${arr[1]} монет) `
       }
+      } else if (typeSt.checked) {
+         console.log('a')
+         for (j = 0; j < party.length; j++) {
+            players = players + `[link${party[j]}] [${party[j]}] (+20 монет) `
+         }
+      }
       players = `[b]Участники:[/b] ${players}`
 
+      if (typeLec.checked) {
       lecReport.value = `${lecData}\n[b]Отчёт о проведённой лекции:[/b]\n${lector}\n${theme}\n${players}`
+      } else if (typeSt.checked) {
+         lecReport.value = `${lecData}\n[b]Отчёт о рассказанных сказках:[/b]\n${lector}\n${theme}\n${players}`
+      }
 
       lecReport.style.height = 'auto';
       lecReport.style.height = `${lecReport.scrollHeight}px`;
@@ -152,9 +163,11 @@ function displayLec() {
    if (this == 'сказка') {
       nameSt.classList.remove('hidden')
       nameLec.classList.add('hidden')
+      lecParty.placeholder = "1568535 1629378"
    } else if (this == 'лекция') {
       nameLec.classList.remove('hidden')
       nameSt.classList.add('hidden')
+      lecParty.placeholder = "1568535+10 1629378+20"
    }
 }
 
