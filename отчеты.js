@@ -18,7 +18,7 @@ for (let i = 0; i < timeOptions.length; i++) {
 
 function makePat() {
    let allCompete
-   if (patPart.value && patCollect.value && patLeader.value) {
+   if ( patCollect.value && patLeader.value) {
       allCompete = true;
    } else { alert('Заполни всё!')}
    
@@ -37,11 +37,13 @@ function makePat() {
       patLeading = '[b]Ведущий(ие):[/b] [link' + patLeaders[0] + '] [' + patLeaders[0] + ']'
       if (patLeaders[1]) {patLeading = patLeading + ', [link' + patLeaders[1] + '] [' + patLeaders[1] + ']'}
 
+      if (patPart.value) {
       let patPartys = patPart.value.split(' ')
       patParty = '[b]Участники:[/b] [link' + patPartys[0] + '] [' + patPartys[0] + ']'
       for (let j = 1; j < patPartys.length; j++) {
          patParty = patParty + ', [link' + patPartys[j] + '] [' + patPartys[j] + ']'
       }
+   } else {patParty = '[b]Участники:[/b] -'}
       
       let patIntruder = '[b]Нарушители:[/b] -'
 
@@ -136,7 +138,6 @@ function makeLec() {
          players = players + `[link${arr[0]}] [${arr[0]}] (+${arr[1]} монет) `
       }
       } else if (typeSt.checked) {
-         console.log('a')
          for (j = 0; j < party.length; j++) {
             players = players + `[link${party[j]}] [${party[j]}] (+20 монет) `
          }
@@ -196,7 +197,7 @@ for (let i = 0; i < vtimeOptions.length; i++) {
 
 function vmakePat() {
    let allCompete
-   if (vpatPart.value && vpatCollect.value && vpatLeader.value) {
+   if ( vpatCollect.value && vpatLeader.value) {
       allCompete = true;
    } else { alert('Заполни всё!')}
    
@@ -214,11 +215,13 @@ function vmakePat() {
       vpatLeading = 'Ведущий: [link' + vpatLeaders[0] + '] [' + vpatLeaders[0] + ']'
       if (vpatLeaders[1]) {vpatLeading = vpatLeading + ', [link' + vpatLeaders[1] + '] [' + vpatLeaders[1] + ']'}
 
+      if (vpatPart.value) {
       let vpatPartys = vpatPart.value.split(' ')
       vpatParty = 'Участники: [link' + vpatPartys[0] + '] [' + vpatPartys[0] + ']'
       for (let j = 1; j < vpatPartys.length; j++) {
          vpatParty = vpatParty + ', [link' + vpatPartys[j] + '] [' + vpatPartys[j] + ']'
       }
+   } else {vpatParty = 'Участники: -'}
       
       vpatReport.value = `[b]Отчёт о пограничном патруле.[/b]\n${vpatData}\n${vpatTime}\n${vpatCollecting}\n${vpatLeading}\n${vpatParty}`
 
@@ -229,6 +232,48 @@ function vmakePat() {
 
 vpatOK.onclick = vmakePat;
 
+let gameStart = document.getElementById('g-start')
+let gameEnd = document.getElementById('g-end')
+let gamerIn = document.getElementById('g-id')
+let gameParty = document.getElementById('g-party')
+let gameOK = document.getElementById('g-ok')
+let gameReport = document.getElementById('g-rep-rez')
+let gameCopy = document.getElementById('g-copy')
+
+function makeGame() {
+   let allCompete
+   if (gameStart.value && gameEnd.value && gamerIn.value && gameParty.value) {
+      allCompete = true;
+   } else { alert('Заполни всё!')}
+   
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      let gameData = `[b]Дата проведения игр:[/b] ${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+
+      let start = `[b]Время начала:[/b] ${gameStart.value}`
+      let end = `[b]Время окончания:[/b] ${gameEnd.value}`
+
+      let gamer = `[b]Ведущий:[/b] [link${gamerIn.value}] [${gamerIn.value}]`
+
+      let party = gameParty.value.split(' ')
+      let players = ''
+      for (j = 0; j < party.length; j++) {
+         let arr = party[j].split('+')
+         players = players + `[link${arr[0]}] [${arr[0]}] (+${arr[1]} монет) `
+      }
+      players = `[b]Участники:[/b] ${players}`
+
+      gameReport.value = `${gameData}\n[b]Отчёт о проведении игр:[/b]\n${start}\n${end}\n${gamer}\n${players}`
+
+      gameReport.style.height = 'auto';
+      gameReport.style.height = `${gameReport.scrollHeight}px`;
+
+   }      
+}
+
+gameOK.onclick = makeGame;
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
@@ -238,3 +283,4 @@ patCopy.onclick = copyReport.bind(patReport)
 watchCopy.onclick = copyReport.bind(watchReport)
 lecCopy.onclick = copyReport.bind(lecReport)
 vpatCopy.onclick = copyReport.bind(vpatReport)
+gameCopy.onclick = copyReport.bind(gameReport)
