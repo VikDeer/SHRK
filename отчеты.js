@@ -348,6 +348,52 @@ function makeD() {
 
 dOK.onclick = makeD;
 
+let travCol = document.getElementById('trav-col');
+let travParty = document.getElementById('trav-p');
+let travOK = document.getElementById('trav-ok')
+let travReport = document.getElementById('trav-rep-rez')
+let travCopy = document.getElementById('trav-copy')
+
+
+function makeTrav() {
+   let allCompete
+   let what = document.querySelector('input[name="trav-w"]:checked')
+   if (!travCol.value && !travParty.value && !what) {
+      allCompete = false;
+      alert('Заполни всё!')
+   } else {
+      allCompete = true
+   }
+
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
+      let travData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+
+      let title = `[b]Отчёт о ${what.value}[/b]`
+
+      let collect = `[u]Собирающий:[/u] [link${travCol.value}] [${travCol.value}]`
+
+      let travPartys = travParty.value.split(' ')
+      travPart = '[u]Участники:[/u] [link' + travPartys[0] + '] [' + travPartys[0] + ']'
+      for (let j = 1; j < travPartys.length; j++) {
+         travPart = travPart + ', [link' + travPartys[j] + '] [' + travPartys[j] + ']'
+      }
+
+      let report = `${travData}\n${title}\n${collect}\n${travPart}`
+
+      travReport.value = report
+      
+      travReport.style.height = 'auto';
+      travReport.style.height = `${travReport.scrollHeight}px`;
+   }
+}
+
+travOK.onclick = makeTrav;
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
@@ -359,3 +405,4 @@ lecCopy.onclick = copyReport.bind(lecReport)
 vpatCopy.onclick = copyReport.bind(vpatReport)
 gameCopy.onclick = copyReport.bind(gameReport)
 dCopy.onclick = copyReport.bind(dReport)
+travCopy.onclick = copyReport.bind(travReport)
