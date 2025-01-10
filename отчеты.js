@@ -26,6 +26,9 @@ function makePat() {
       patLeading = ''; patParty = ''
       let data = new Date;
       let month = data.getMonth() + 1
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
       patData = '[b]Дата проведения лагерного патруля:[/b] ' + data.getDate() + '.' + month + '.' + data.getFullYear().toString().substr(2,2);
       
       if (timeText.value) { patTime = '[b]Время сбора:[/b] ' + timeText.value }
@@ -73,6 +76,9 @@ function makeWhatch() {
    if (allCompete) {
       let data = new Date;
       let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
       let watchData = `[b]Дата проведения лагерного дозора:[/b] ${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
 
       let watchHours = `[b]Часы дозора:[/b] ${watchStart.value} - ${watchEnd.value}`
@@ -119,6 +125,9 @@ function makeLec() {
    if (allCompete) {
       let data = new Date;
       let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
       let lecData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)} | ${lecStart.value}[/b]`
 
       let lector = `[b]Ведущий:[/b] [link${lecerIn.value}] [${lecerIn.value}]`
@@ -205,6 +214,9 @@ function vmakePat() {
       vpatLeading = ''; vpatParty = ''
       let data = new Date;
       let month = data.getMonth() + 1
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
       vpatData = '[b]' + data.getDate() + '.' + month + '.' + data.getFullYear().toString().substr(2,2) + '[/b]';
       
       vpatTime = 'Время сбора: ' + vtimeSelect.value
@@ -249,6 +261,9 @@ function makeGame() {
    if (allCompete) {
       let data = new Date;
       let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
       let gameData = `[b]Дата проведения игр:[/b] ${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
 
       let start = `[b]Время начала:[/b] ${gameStart.value}`
@@ -273,6 +288,43 @@ function makeGame() {
 }
 
 gameOK.onclick = makeGame;
+
+let dStart = document.getElementById('d-start')
+let dEnd = document.getElementById('d-end')
+let dIn = document.getElementById('der-input')
+let dPathIn = document.getElementById('d-path')
+let dOK = document.getElementById('d-ok')
+let dReport = document.getElementById('d-rep-rez')
+let dCopy = document.getElementById('d-copy')
+
+function makeD() {
+   let allCompete
+   if (dStart.value && dEnd.value && dIn.value) {
+      allCompete = true;
+   } else { alert('Заполни всё!')}
+   
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
+      let dData = `${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+
+      let dHours = `[b]${dStart.value} - ${dEnd.value}[/b]`
+
+      let der = `[b]Дозорный:[/b] [link${dIn.value}] [${dIn.value}]`
+
+      let dPath = `[b]Локация:[/b] ${dPathIn.value}`
+
+      dReport.value = `[b]Отчёт о пассивном дозоре.[/b]\n${dData}\n${dHours}\n${der}\n${dPath}\n[b]Нарушители:[/b] -`
+
+      dReport.style.height = 'auto';
+      dReport.style.height = `${dReport.scrollHeight}px`;
+   }
+}
+
+dOK.onclick = makeD;
 
 let copyReport = function() {
    this.select();
