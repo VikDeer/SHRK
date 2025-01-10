@@ -392,7 +392,58 @@ function makeTrav() {
    }
 }
 
-travOK.onclick = makeTrav;
+let docCol = document.getElementById("doc-col");
+let docPartys = document.getElementById("doc-p")
+let docPom = document.getElementById("doc-pom")
+let docOK = document.getElementById("doc-ok")
+let docReport = document.getElementById("doc-rep-rez")
+let docCopy = document.getElementById("doc-copy")
+
+function makeDoc() {
+   let allCompete
+   if (!docCol.value && !docPartys.value) {
+      allCompete = false;
+      alert('Заполни всё!')
+   } else {
+      allCompete = true
+   }
+
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
+      let docData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+
+      let collect = `[u]Собирающий:[/u] [link${docCol.value}] [${docCol.value}]`
+
+      let part = docPartys.value.split(' ')
+      let players = ''
+      for (j = 0; j < part.length; j++) {
+         let arr = part[j].split('+')
+         players = players + `[link${arr[0]}] [${arr[0]}] (+${arr[1]} мышей) `  
+      }
+      players = `[u]Участники:[/u] ${players}`
+
+      let pom = '[u]Помощники:[/u]'
+      if (docPom.value) {
+         let poms = docPom.value.split(' ');
+         for (h = 0; h < poms.length; h++) {
+            pom = `${pom} [link${poms[h]}] [${poms[h]}]`
+         }
+      } else {
+         pom = `${pom} -`
+      }
+
+      docReport.value = `${docData}\n[b]Отчёт о докторском патруле.[/b]\n${players}\n${collect}\n${pom}`
+ 
+      docReport.style.height = 'auto';
+      docReport.style.height = `${docReport.scrollHeight}px`;
+   }
+}
+
+docOK.onclick = makeDoc;
 
 let copyReport = function() {
    this.select();
