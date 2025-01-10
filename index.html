@@ -82,13 +82,15 @@
    </div>
 </div>
 <hr>
-<div class="contaner doz"><h2>Пассивный дозор</h2>
+<div class="contaner doz"><h2>Дозор</h2>
    <div class="report">
       <label>Начало: <input type="text" id="d-start" placeholder="чч:мм"></label>
       <label>Конец: <input type="text" id="d-end" placeholder="чч:мм"></label>
       <label>Дозорный: <input id='der-input' type='text' placeholder="1568535"></label>
-      <label>Локация: <select id="d-path"><option>Дыра в Корабле</option><option>Извилистая тропа</option><option>Тихий залив</option><option>Непроходимая глушь</option></select></label>
-      <button id="d-ok">Составить отчет</button>
+      <span class="d-st">Вид: <label><i>Пассивный</i><input id="pas-sel" type="radio" name="what-d" value="pas"></label><label><i>Активный</i><input id="act-sel" type="radio" name="what-d" value="act"></label></span>
+      <label id="pas-path" class="hidden">Локация: <select id="pas-d-path"><option>Дыра в Корабле</option><option>Извилистая тропа</option><option>Тихий залив</option><option>Непроходимая глушь</option></select></label>
+      <label id="act-path" class="hidden">Маршрут: <select id="act-d-path"><option>Маршрут А</option><option>Маршрут Б</option><option>Маршрут В</option></select></label>
+      <button class="hidden" id="d-ok">Составить отчет</button>
    </div>
    <div>
       <textarea id="d-rep-rez"></textarea>

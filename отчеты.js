@@ -292,10 +292,27 @@ gameOK.onclick = makeGame;
 let dStart = document.getElementById('d-start')
 let dEnd = document.getElementById('d-end')
 let dIn = document.getElementById('der-input')
-let dPathIn = document.getElementById('d-path')
+let dPathIn = document.getElementById('pas-d-path')
+let dPathAct = document.getElementById('act-d-path')
 let dOK = document.getElementById('d-ok')
 let dReport = document.getElementById('d-rep-rez')
 let dCopy = document.getElementById('d-copy')
+let pasSel = document.getElementById('pas-sel'); let actSel = document.getElementById('act-sel')
+let pasD = document.getElementById('pas-path'); let actD = document.getElementById('act-path')
+
+dSelect = function() {
+   if (this == 'pas') {
+      actD.classList.add("hidden");
+      pasD.classList.remove("hidden")
+   } else if (this == 'act') {
+      actD.classList.remove("hidden");
+      pasD.classList.add("hidden")
+   }
+   dOK.classList.remove("hidden")
+}
+
+pasSel.onclick = dSelect.bind(pasSel.value);
+actSel.onclick = dSelect.bind(actSel.value)
 
 function makeD() {
    let allCompete
@@ -309,15 +326,20 @@ function makeD() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let dData = `${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let dData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
 
-      let dHours = `[b]${dStart.value} - ${dEnd.value}[/b]`
+      let dHours = `Часы дозора: ${dStart.value} - ${dEnd.value}`
 
-      let der = `[b]Дозорный:[/b] [link${dIn.value}] [${dIn.value}]`
+      let der = `Дозорный: [link${dIn.value}] [${dIn.value}]`
 
-      let dPath = `[b]Локация:[/b] ${dPathIn.value}`
-
-      dReport.value = `[b]Отчёт о пассивном дозоре.[/b]\n${dData}\n${dHours}\n${der}\n${dPath}\n[b]Нарушители:[/b] -`
+      let dPath
+      if (pasSel.checked) {
+         dPath = `Локация: ${dPathIn.value}`
+         dReport.value = `[b]Отчёт о пассивном дозоре.[/b]\n${dData}\n${dHours}\n${der}\n${dPath}`
+      } else if (actSel.checked) {
+         dPath = `Маршрут: ${dPathAct.value.substr(8,1)}`
+         dReport.value = `[b]Отчёт об активном дозоре.[/b]\n${dData}\n${dHours}\n${der}\n${dPath}`
+      }
 
       dReport.style.height = 'auto';
       dReport.style.height = `${dReport.scrollHeight}px`;
