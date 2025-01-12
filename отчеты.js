@@ -225,7 +225,7 @@ function vmakePat() {
       
       let vpatLeaders = vpatLeader.value.split(' ')
       vpatLeading = 'Ведущий: [link' + vpatLeaders[0] + '] [' + vpatLeaders[0] + ']'
-      if (vpatLeaders[1]) {vpatLeading = vpatLeading + ', [link' + vpatLeaders[1] + '] [' + vpatLeaders[1] + ']'}
+      if (vpatLeaders[1]) {vpatLeading = vpatLeading + ' (А), [link' + vpatLeaders[1] + '] [' + vpatLeaders[1] + '] (Б)'}
 
       if (vpatPart.value) {
       let vpatPartys = vpatPart.value.split(' ')
