@@ -445,6 +445,104 @@ function makeDoc() {
 
 docOK.onclick = makeDoc;
 
+let medalerName = document.getElementById('medal-name');
+let medalID = document.getElementById('medal-id');
+let medalDol = document.getElementById('medal-d');
+let medalGr = document.getElementById('medal-gr')
+let medalType = document.getElementById('medal-t')
+let medalOK = document.getElementById('m-ok');
+let medalReport = document.getElementById('m-rep-rez');
+let medalCopy = document.getElementById('m-copy');
+let medalScr = document.getElementById('m-scr')
+
+let mMedals = ['Юный активист', 'Непревзойденный активист', 'Юный непоседа', 'Неповторимый непоседа', 'Юный страж', 'Превосходный страж']
+let nMedals = ['Острые когти', 'Умелый боец', 'Покоритель волн', 'Покоривший море', 'Покоритель вершин', 'Покоривший солёные скалы', 'Археолог-любитель', 'Великий кладоискатель', 'Собачий нюх', 'Совершенное чутьё']
+let kMedals = ['Правосудие', 'Ветеран передовой', 'Наш дом — наша крепость']
+let sfMedals = ['Спокойные берега', 'Блюститель порядка', 'Всегда начеку', 'Спокойствие бесценно', 'Прирождённый охотник', 'Неутомимый добытчик', 'Молодой поварёнок', 'Талантливый кулинар', 'Любимец доктора', 'Опытный травник', 'Проворный зверолов', 'Прошедший тысячи троп', 'Исцеляющий взгляд', 'Заклинатель трав']
+let oMedals = ['Путеводный свет', 'Преданный спутник', 'Верный напарник', 'Крепкая лапа', 'Перо знаний', 'Мозгодуй', 'Из уст в уста', 'Сокровенные знания', 'Исследующий морские глубины', 'Пересчитавший все песчинки на морском дне', 'Хитрый вор перьев', 'Прозвавшийся птичьим несчастьем', 'Обнаруживший залежи драгоценностей', 'Хранитель морских сокровищ', 'Слушающий причитания моря', 'Позаботившийся о морском покое', 'Мастер кисти', 'Виртуоз кисти', 'Овладевающий морским искусством', 'Мастер морского боя', 'Боевой товарищ', 'Старший зверь','Ловкий добытчик лакомства','Бесплатный сыр лишь в мышеловке','Сырный любитель','Сырная душа','Ловец горячих новостей','Охотник за сенсациями','Искусство убеждения','Продай мне эту ручку']
+let ostMedals = ['Триумф','Коллективные узы','Объединяющий дух','Лапа помощи','Мастер слова','Виртуоз слова','Паучьи сети','Ловкий собиратель','Всегда на связи','Опутанный всемирной паутиной','Верный компаньон','Образцовый проводник','Плечом к плечу','Мы — едины']
+let otrMedals = ['Сказитель легенд','Зубастый крепыш','Белопёрый поздравитель','Любимый учитель','Дарящий улыбку','Чистота и порядок','Пернатый крикун','Резвость дельфина']
+
+let medalTypes = ['Для малышей', 'За навыки', 'Каратели', 'Связанные со сферами', 'Связанные с отрядами', 'Остальные медали', 'Отрядные медали']
+for (i = 0; i < medalTypes.length; i++) {
+   let opt = document.createElement('option');
+   opt.textContent = medalTypes[i];
+   medalGr.append(opt)
+}
+
+let medalButtons = document.querySelectorAll('medal')
+let medalGroups = {}
+for (i = 0; i < medalTypes.length; i++) {
+   medalGroups[medalTypes[i]] = document.getElementById(medalTypes[i])
+}
+for (i = 0; i < mMedals.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = mMedals[i]
+   medalGroups['Для малышей'].lastChild.append(opt)
+}
+for (i = 0; i < nMedals.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = nMedals[i]
+   medalGroups['За навыки'].lastChild.append(opt)
+}
+for (i = 0; i < kMedals.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = kMedals[i]
+   medalGroups['Каратели'].lastChild.append(opt)
+}
+for (i = 0; i < sfMedals.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = sfMedals[i]
+   medalGroups['Связанные со сферами'].lastChild.append(opt)
+}
+for (i = 0; i < oMedals.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = oMedals[i]
+   medalGroups['Связанные с отрядами'].lastChild.append(opt)
+}
+for (i = 0; i < ostMedals.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = ostMedals[i]
+   medalGroups['Остальные медали'].lastChild.append(opt)
+}
+for (i = 0; i < otrMedals.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = otrMedals[i]
+   medalGroups['Отрядные медали'].lastChild.append(opt)
+}
+
+medalShow = function(a) {
+   for (key in medalGroups) {
+      medalGroups[key].classList.add('hidden')
+   }
+   medalGroups[a].classList.remove('hidden')
+}
+
+medalGr.addEventListener('change', () => { medalShow(medalGr.value) })
+
+let makeMedal = function() {
+   let allCompete = true;
+   if (!medalerName.value && !medalID.value && !medalScr.value) {
+      allCompete = false
+      alert('Заполни всё!')
+   }
+
+   if (allCompete) {
+      let scrs = medalScr.value.split(' ')
+      let dokva = `[b]Доказательства:[/b] [url=${scrs[0]}]скриншот[/url]`
+      for (j = 1; j < scrs.length; j++) {
+         dokva += ` [[url=${scrs[j]}]${j+1}[/url]]`
+      }
+
+      medalReport.value = `[b]Запрос медали[/b]\nЯ, ${medalerName.value} [${medalID.value}], ${medalDol.value} шайки, выполнил(а) требования на медаль «${medalGroups[medalGr.value].lastChild.value}».\n${dokva}`
+      
+      medalReport.style.height = 'auto';
+      medalReport.style.height = `${medalReport.scrollHeight}px`;
+   }
+}
+
+medalOK.onclick = makeMedal
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
@@ -458,3 +556,4 @@ gameCopy.onclick = copyReport.bind(gameReport)
 dCopy.onclick = copyReport.bind(dReport)
 travCopy.onclick = copyReport.bind(travReport)
 docCopy.onclick = copyReport.bind(docReport)
+medalCopy.onclick = copyReport.bind(medalReport)
