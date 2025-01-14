@@ -544,6 +544,58 @@ let makeMedal = function() {
 
 medalOK.onclick = makeMedal
 
+let navID = document.getElementById('nav-id')
+let navParty = document.getElementById('nav-party')
+let navScr = document.getElementById('nav-scr')
+let navOK = document.getElementById('nav-ok')
+let navReport = document.getElementById('nav-rep-rez')
+let navCopy = document.getElementById('nav-copy')
+
+let makeNav = function() {
+   let allCompete = true
+   if (!navID.value) {
+      allCompete = false
+      alert('Заполни всё!')
+   }
+
+   if (allCompete) {
+
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
+      let navData = `${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+
+
+   let scr
+   if (navScr.value) {
+      scrs = navScr.value.split(' ')
+      scr = `[url=${scrs[0]}]скриншот Глубокого Залива до вылазки[/url]\n[url=${scrs[1]}]скриншот Глубокого Залива после вылазки[/url]`
+   } else {
+      scr = `Скриншоты были отправлены в беседу навигаторов.`
+   }
+
+      let party
+      if (!navParty.value) {
+         party = `[b]Участники:[/b] -`
+      } else {
+         let navP = navParty.value.split(' ')
+         party = `[b]Участники:[/b] [link${navP[0]}] [${navP[0]}]`
+         for (i = 1; i < navP.length; i++) {
+            party += `, [link${navP[i]}] [${navP[i]}]`
+         }
+      }
+
+      navReport.value = `[b]Дата проведения: ${navData}[/b]\n[b]Навигатор:[/b] [link${navID.value}] [${navID.value}]\n${party}\n${scr}`
+      
+      navReport.style.height = 'auto';
+      navReport.style.height = `${navReport.scrollHeight}px`;
+   }
+}
+
+navOK.onclick = makeNav
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
