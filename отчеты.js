@@ -393,6 +393,8 @@ function makeTrav() {
    }
 }
 
+travOK.onclick = makeTrav
+
 let docCol = document.getElementById("doc-col");
 let docPartys = document.getElementById("doc-p")
 let docPom = document.getElementById("doc-pom")
