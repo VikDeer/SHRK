@@ -598,6 +598,92 @@ let makeNav = function() {
 
 navOK.onclick = makeNav
 
+let grushID = document.getElementById('grush-id');
+let grushStart = document.getElementById('grush-start');
+let grushEnd = document.getElementById('grush-end');
+let grushRole = document.getElementById('grush-role')
+let grushMH = document.getElementById('grush-m-h');
+let grushM = document.getElementById('grush-m')
+let grushOK = document.getElementById('grush-ok')
+let grushReport = document.getElementById('grush-rep-rez')
+let grushCopy = document.getElementById('grush-copy');
+
+let grushShow = function(a) {
+   if (a == 'МГ') {
+      grushMH.classList.remove('hidden')
+   } else {
+      grushMH.classList.add('hidden')
+   }
+}
+
+grushRole.addEventListener('change', () => { grushShow(grushRole.value) })
+
+let makeGrush = function() {
+   let allCompete = true;
+   if (!grushID.value && !grushStart.value && !grushEnd.value) {
+      allCompete = false
+      alert('Заполни всё!')
+   }
+
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
+      let grushData = `${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+
+      let start = grushStart.value.split(':'); let end = grushEnd.value.split(':')
+      let startInMinutes = start[0] * 60 + start[1] * 1;
+      let endInMinutes = end[0] * 60 + end[1] * 1;
+
+      let differenceInMinutes = endInMinutes - startInMinutes;
+
+// Переводим разницу в часы и минуты
+let hours = Math.floor(differenceInMinutes / 60);
+let min = differenceInMinutes % 60;
+
+      let time
+      if (hours == 1) {
+         time = `(${hours} час`
+      } else if (hours == 0) {
+         time = `(`
+      } else if (hours < 5) {
+         time = `(${hours} часа`
+      } else {
+         time = `(${hours} часов`
+      }
+      if (min == 0) {
+         time += `)`
+      } else if (min == 1 && !hours == 0) {
+         time += ` ${min} минута)`
+      } else if (min < 5 && min > 0 && !hours == 0) {
+         time += ` ${min} минуты)`
+      } else if (!hours == 0) {
+         time += ` ${min} минут)`
+      
+   } else if (min == 1 && hours == 0) {
+      time += `${min} минута)`
+   } else if (min < 5 && min > 0 && hours == 0) {
+      time += `${min} минуты)`
+   } else if (hours == 0) {
+      time += `${min} минут)`
+   }
+   
+   grushReport.value = `[b]Грушевание[/b]\n${grushData}; ${grushStart.value} - ${grushEnd.value} ${time}\n[b]${grushRole.value}:[/b] [link${grushID.value}] [${grushID.value}]`
+
+   if (grushRole.value == 'МГ') {
+      grushReport.value += ` ${grushM.value}`
+   }
+
+   grushReport.style.height = 'auto';
+   grushReport.style.height = `${grushReport.scrollHeight}px`;
+   }
+}
+
+
+grushOK.onclick = makeGrush
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
@@ -613,3 +699,4 @@ travCopy.onclick = copyReport.bind(travReport)
 docCopy.onclick = copyReport.bind(docReport)
 medalCopy.onclick = copyReport.bind(medalReport)
 navCopy.onclick = copyReport.bind(navReport)
+grushCopy.onclick = copyReport.bind(grushReport)

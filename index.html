@@ -143,6 +143,28 @@
    </div>
 </div>
 <hr>
+<div class="contaner"><h2>Грушевание</h2>
+   <div class="report">
+      <label>Грушующий: <input id="grush-id" type="text" placeholder="1568535"></label>
+      <label>Время начала: <input id="grush-start" type="text" placeholder="чч:мм"></label>
+      <label>Время конца: <input id="grush-end" type="text" placeholder="чч:мм"></label>
+      <label>Роль: <select id="grush-role">
+         <option>БГ</option>
+         <option>МГ</option>
+         <option>ОГ</option>
+      </select></label>
+      <label class="hidden" id = 'grush-m-h'>Для МГ: <select id="grush-m">
+         <option>МО</option>
+         <option>МР</option>
+      </select></label>
+      <button id="grush-ok">Составить отчет</button>
+   </div>
+   <div>
+      <textarea id="grush-rep-rez"></textarea>
+      <button id="grush-copy">Скопировать отчет</button>
+   </div>
+</div>
+<hr>
 <div class="contaner"><h2>Запрос медали</h2>
    <div class="report">
       <label>Имя: <input id="medal-name" type="text" placeholder="Цепея"></label>
