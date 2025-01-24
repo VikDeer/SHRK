@@ -722,6 +722,80 @@ let min = differenceInMinutes % 60;
 
 grushOK.onclick = makeGrush
 
+let troferName = document.getElementById('trof-name');
+let trofID = document.getElementById('trof-id');
+let trofDol = document.getElementById('trof-d');
+let trofGr = document.getElementById('trof-gr')
+let trofType = document.getElementById('trof-t')
+let trofOK = document.getElementById('trof-ok');
+let trofReport = document.getElementById('trof-rep-rez');
+let trofCopy = document.getElementById('trof-copy');
+let trofScr = document.getElementById('trof-scr')
+
+let otrofs = ['Треклятый дублон', 'Кинжал триумфа', 'Медный компас', 'Верный путь', 'Записки краболова', 'Жаба', 'Мешок с золотом','Созвездие морского конька','Созвездие акулы','Созвездие дельфина','Созвездие косатки','Созвездие осьминога','Созвездие мурены','Созвездие ската','Созвездие черепахи','Созвездие крылатки','Созвездие медузы','Созвездие летучей рыбы','Созвездие марлина','Созвездие нарвала','Созвездие кита']
+let otrtrofs = ['Задорный компаньон','Безупречность осьминога','Китовая забота','Неугомонность чайки','Акулья свирепость','Рыбья задорность','Черепашья мудрость','Прирождëнный творец','Коралловый хохотун','Рубиновый глаз','Красноречивый рассказчик','Задорность малька','Путеводная звезда']
+let dtrofs = ['Пистоль','Абордажный палаш','Монета мертвецов']
+
+let trofTypes = ['Общекомандные трофеи', 'Отрядные трофеи', 'Должностные трофеи']
+for (i = 0; i < trofTypes.length; i++) {
+   let opt = document.createElement('option');
+   opt.textContent = trofTypes[i];
+   trofGr.append(opt)
+}
+
+let trofButtons = document.querySelectorAll('trof')
+let trofGroups = {}
+for (i = 0; i < trofTypes.length; i++) {
+   trofGroups[trofTypes[i]] = document.getElementById(trofTypes[i])
+}
+for (i = 0; i < otrofs.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = otrofs[i]
+   trofGroups['Общекомандные трофеи'].lastChild.append(opt)
+}
+for (i = 0; i < otrtrofs.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = otrtrofs[i]
+   trofGroups['Отрядные трофеи'].lastChild.append(opt)
+}
+for (i = 0; i < dtrofs.length; i++) {
+   let opt = document.createElement('option')
+   opt.textContent = dtrofs[i]
+   trofGroups['Должностные трофеи'].lastChild.append(opt)
+}
+
+trofShow = function(a) {
+   for (key in trofGroups) {
+      trofGroups[key].classList.add('hidden')
+   }
+   trofGroups[a].classList.remove('hidden')
+}
+
+trofGr.addEventListener('change', () => { trofShow(trofGr.value) })
+
+let maketrof = function() {
+   let allCompete = true;
+   if (!troferName.value && !trofID.value && !trofScr.value) {
+      allCompete = false
+      alert('Заполни всё!')
+   }
+
+   if (allCompete) {
+      let scrs = trofScr.value.split(' ')
+      let dokva = `[b]Доказательства:[/b] [url=${scrs[0]}]скриншот[/url]`
+      for (j = 1; j < scrs.length; j++) {
+         dokva += ` [[url=${scrs[j]}]${j+1}[/url]]`
+      }
+
+      trofReport.value = `[b]Запрос трофея[/b]\nЯ, ${troferName.value} [${trofID.value}], ${trofDol.value} шайки, выполнил(а) требования на медаль «${trofGroups[trofGr.value].lastChild.value}».\n${dokva}`
+      
+      trofReport.style.height = 'auto';
+      trofReport.style.height = `${trofReport.scrollHeight}px`;
+   }
+}
+
+trofOK.onclick = maketrof
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")

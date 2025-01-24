@@ -20,6 +20,7 @@
       <li><a href="#Морская вылазка">Морская вылазка</a></li>
       <li><a href="#Грушевание">Грушевание</a></li>
       <li><a href="#Запрос медали">Запрос медали</a></li>
+      <li><a href="#Запрос трофея">Запрос трофея</a></li>
    </ul>
 
 <div class="main">
@@ -204,6 +205,30 @@
    <div>
       <textarea id="m-rep-rez"></textarea>
       <button id="m-copy">Скопировать отчет</button>
+   </div>
+   </div>
+   <hr>
+<div class="contaner"><h2 id="Запрос трофея">Запрос трофея</h2>
+   <div class="report">
+      <label>Имя: <input id="trof-name" type="text" placeholder="Цепея"></label>
+      <label>Айди: <input id="trof-id" type="text" placeholder="1568535"></label>
+      <label>Должность: <select id="trof-d">
+         <option>малыш</option>
+         <option>малыш-топотушка</option>
+         <option>юнга</option>
+         <option>матрос</option>
+         <option>старший матрос</option>
+      </select></label>
+      <label>Тип трофея: <select id="trof-gr"></select></label>
+      <label class="trof" id = "Общекомандные трофеи">Трофей: <select></select></label>
+      <label class="hidden trof" id = "Отрядные трофеи">Трофей: <select></select></label>
+      <label class="hidden trof" id = "Должностные трофеи">Трофей: <select></select></label>
+      <label>Скриншот(ы): <input type="text" id="trof-scr" placeholder="http://d.zaix.ru/Jfvj.png http://d.zaix.ru/Jk3U.png"></label>
+      <button id="trof-ok">Составить отчет</button>
+   </div>
+   <div>
+      <textarea id="trof-rep-rez"></textarea>
+      <button id="trof-copy">Скопировать отчет</button>
    </div>
    </div>
 </div>
