@@ -7,11 +7,25 @@
    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+   <ul class="nav">
+      <button>Скрыть</button>
+      <li><a href="#Лагерный патруль">Лагерный патруль</a></li>
+      <li><a href="#Лагерный дозор">Лагерный дозор</a></li>
+      <li><a href="#Лекции и Сказки">Лекции и Сказки</a></li>
+      <li><a href="#Игры">Игры</a></li>
+      <li><a href="#Пограничный патруль">Пограничный патруль</a></li>
+      <li><a href="#Дозор">Дозор</a></li>
+      <li><a href="#Веточник">Веточник</a></li>
+      <li><a href="#Докторский патруль">Докторский патруль</a></li>
+      <li><a href="#Морская вылазка">Морская вылазка</a></li>
+      <li><a href="#Грушевание">Грушевание</a></li>
+      <li><a href="#Запрос медали">Запрос медали</a></li>
+   </ul>
 
 <div class="main">
    <img src="img/logo.png">
    <hr>
-<div class="contaner patrol"><h2>Лагерный патруль</h2>
+<div class="contaner patrol"><h2 id="Лагерный патруль">Лагерный патруль</h2>
    <div class="report">
       <label>Время сбора: <select id="time"></select><input id ='another-time' type="text" placeholder="Другое время"></label>
       <label>Собирающий: <input id='collect' type='text' placeholder="1568535"></label>
@@ -25,7 +39,7 @@
    </div>
 </div>
 <hr>
-<div class="contaner watch"><h2>Лагерный дозор</h2>
+<div class="contaner watch"><h2 id="Лагерный дозор">Лагерный дозор</h2>
    <div class="report">
       <label>Начало: <input type="text" id="watch-start" placeholder="чч:мм"></label>
       <label>Конец: <input type="text" id="watch-end" placeholder="чч:мм"></label>
@@ -39,7 +53,7 @@
    </div>
 </div>
 <hr>
-<div class="contaner lecture"><h2>Лекции и Сказки</h2>
+<div class="contaner lecture"><h2 id="Лекции и Сказки">Лекции и Сказки</h2>
    <div class="report">
       <label>Время: <input type="text" id="lec-time" placeholder="чч:мм"></label>
       <label>Ведущий: <input type="text" id="lec-id" placeholder="1568535"></label>
@@ -54,7 +68,7 @@
    </div>
 </div> 
 <hr>
-<div class="contaner games"><h2>Игры</h2>
+<div class="contaner games"><h2 id="Игры">Игры</h2>
    <div class="report">
       <label>Время начала: <input type="text" id="g-start" placeholder="чч:мм"></label>
       <label>Время конца: <input type="text" id="g-end" placeholder="чч:мм"></label>
@@ -68,7 +82,7 @@
    </div>
 </div> 
 <hr>
-<div class="contaner patrol"><h2>Пограничный патруль</h2>
+<div class="contaner patrol"><h2 id="Пограничный патруль">Пограничный патруль</h2>
    <div class="report">
       <label>Время сбора: <select id="v-time"></select></label>
       <label>Собирающий: <input id='v-collect' type='text' placeholder="1568535"></label>
@@ -83,7 +97,7 @@
    </div>
 </div>
 <hr>
-<div class="contaner doz"><h2>Дозор</h2>
+<div class="contaner doz"><h2 id="Дозор">Дозор</h2>
    <div class="report">
       <label>Начало: <input type="text" id="d-start" placeholder="чч:мм"></label>
       <label>Конец: <input type="text" id="d-end" placeholder="чч:мм"></label>
@@ -99,7 +113,7 @@
    </div>
 </div>
 <hr>
-<div class="contaner trav"><h2>Веточник/травник/мховник</h2>
+<div class="contaner trav"><h2 id="Веточник">Веточник/травник/мховник</h2>
    <div class="report">
       <label>Собирающий: <input id='trav-col' type='text' placeholder="1568535"></label>
       <label>Участники: <input id="trav-p" type="text" placeholder="1568535 1629378"></label>
@@ -116,7 +130,7 @@
    </div>
 </div>
 <hr>
-<div class="contaner doc"><h2>Докторский патруль</h2>
+<div class="contaner doc"><h2 id="Докторский патруль">Докторский патруль</h2>
    <div class="report">
       <label>Собирающий: <input id="doc-col" type="text" placeholder="1568535"></label>
       <label>Участники: <input id="doc-p" type="text" placeholder="1568535+5 1629378+7"></label>
@@ -129,7 +143,7 @@
    </div>
 </div>
 <hr>
-<div class="contaner"><h2>Морская вылазка</h2>
+<div class="contaner"><h2 id="Морская вылазка">Морская вылазка</h2>
    <div class="report">
       <label>Навигатор: <input id="nav-id" type="text" placeholder="1568535"></label>
       <label>Участники: <input id="nav-party" type="text" placeholder="1629378 2410"></label>
@@ -143,7 +157,7 @@
    </div>
 </div>
 <hr>
-<div class="contaner"><h2>Грушевание</h2>
+<div class="contaner"><h2 id="Грушевание">Грушевание</h2>
    <div class="report">
       <label>Грушующий: <input id="grush-id" type="text" placeholder="1568535"></label>
       <label>Время начала: <input id="grush-start" type="text" placeholder="чч:мм"></label>
@@ -165,7 +179,7 @@
    </div>
 </div>
 <hr>
-<div class="contaner"><h2>Запрос медали</h2>
+<div class="contaner"><h2 id="Запрос медали">Запрос медали</h2>
    <div class="report">
       <label>Имя: <input id="medal-name" type="text" placeholder="Цепея"></label>
       <label>Айди: <input id="medal-id" type="text" placeholder="1568535"></label>

@@ -1,3 +1,37 @@
+
+let nav = document.querySelectorAll('.nav li')
+let navBtn = document.querySelector('.nav button')
+
+for (i = 0; i < nav.length; i++) {
+   if (localStorage.navShow == '0') {
+   nav[i].classList.add('hidden')
+   navBtn.textContent = 'Раскрыть'
+}
+if (localStorage.navShow == '1') {
+   nav[i].classList.remove('hidden')
+   navBtn.textContent = 'Скрыть'
+}
+}
+
+let showNav = function() {
+   if (localStorage.navShow == '1' || navBtn.textContent == 'Скрыть') {
+   for (i = 0; i < nav.length; i++) {
+      nav[i].classList.add('hidden')
+      navBtn.textContent = 'Раскрыть'
+      localStorage.navShow = 0
+   }}
+   else if (localStorage.navShow == '0' || navBtn.textContent == 'Раскрыть') {
+      for (i = 0; i < nav.length; i++) {
+      nav[i].classList.remove('hidden')
+      navBtn.textContent = 'Скрыть'
+      localStorage.navShow = 1
+   }
+}
+
+}
+navBtn.onclick = showNav
+
+
 let patCollect = document.getElementById('collect');
 let patLeader = document.getElementById('leader');
 let patPart = document.getElementById('part');
@@ -423,9 +457,13 @@ function makeDoc() {
 
       let part = docPartys.value.split(' ')
       let players = ''
-      for (j = 0; j < part.length; j++) {
+      let first = part[0].split('+')
+      players += `[link${first[0]}] [${first[0]}] (+${first[1]} мышей)`
+      if (part.length > 0) {
+      for (j = 1; j < part.length; j++) {
          let arr = part[j].split('+')
-         players = players + `[link${arr[0]}] [${arr[0]}] (+${arr[1]} мышей) `  
+         players = players + `, [link${arr[0]}] [${arr[0]}] (+${arr[1]} мышей)`  
+      }
       }
       players = `[u]Участники:[/u] ${players}`
 
