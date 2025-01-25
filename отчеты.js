@@ -470,9 +470,12 @@ function makeDoc() {
       let pom = '[u]Помощники:[/u]'
       if (docPom.value) {
          let poms = docPom.value.split(' ');
-         for (h = 0; h < poms.length; h++) {
-            pom = `${pom} [link${poms[h]}] [${poms[h]}]`
+         pom += `[link${poms[0]}] [${poms[0]}]`
+         if (poms[1]) {
+         for (h = 1; h < poms.length; h++) {
+            pom += `, [link${poms[h]}] [${poms[h]}]`
          }
+      }
       } else {
          pom = `${pom} -`
       }
