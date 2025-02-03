@@ -82,9 +82,8 @@ function makePat() {
       }
    } else {patParty = '[b]Участники:[/b] -'}
       
-      let patIntruder = '[b]Нарушители:[/b] -'
 
-      patReport.value = `${patData}\n[b]Отчёт о проведении лагерного патруля:[/b]\n${patTime}\n${patCollecting}\n${patLeading}\n${patParty}\n${patIntruder}`
+      patReport.value = `${patData}\n[b]Отчёт о проведении лагерного патруля:[/b]\n${patTime}\n${patCollecting}\n${patLeading}\n${patParty}`
 
       patReport.style.height = 'auto';
       patReport.style.height = `${patReport.scrollHeight}px`;
@@ -121,7 +120,7 @@ function makeWhatch() {
 
       let watchPath = `[b]Маршрут:[/b] ${watchPathIn.value}`
 
-      watchReport.value = `${watchData}\n[b]Отчёт о проведении лагерного дозора:[/b]\n${watchHours}\n${watcher}\n${watchPath}\n[b]Нарушители:[/b] -`
+      watchReport.value = `${watchData}\n[b]Отчёт о проведении лагерного дозора:[/b]\n${watchHours}\n${watcher}\n${watchPath}`
 
       watchReport.style.height = 'auto';
       watchReport.style.height = `${watchReport.scrollHeight}px`;
