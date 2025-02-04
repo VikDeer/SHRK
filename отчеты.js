@@ -466,7 +466,7 @@ function makeDoc() {
       }
       players = `[u]Участники:[/u] ${players}`
 
-      let pom = '[u]Помощники:[/u]'
+      let pom = '[u]Помощники:[/u] '
       if (docPom.value) {
          let poms = docPom.value.split(' ');
          pom += `[link${poms[0]}] [${poms[0]}]`
