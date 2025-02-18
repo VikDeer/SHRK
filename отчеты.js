@@ -858,6 +858,56 @@ let maketrof = function() {
 
 trofOK.onclick = maketrof
 
+let expCol = document.getElementById('exp-col');
+let expParty = document.getElementById('exp-p');
+let expOK = document.getElementById('exp-ok')
+let expReport = document.getElementById('exp-rep-rez')
+let expCopy = document.getElementById('exp-copy')
+
+if (localStorage.id) {expCol.value = localStorage.id}
+
+function makeexp() {
+   let allCompete
+   let what = document.querySelector('input[name="exp-w"]:checked')
+   if (!expCol.value && !expParty.value && !what) {
+      allCompete = false;
+      alert('Заполни всё!')
+   } else {
+      allCompete = true
+   }
+
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
+      let expData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+
+      let title = `[b]Отчёт о ${what.value} экспедиции[/b]`
+
+      let collect = `[u]Собирающий:[/u] [link${expCol.value}] [${expCol.value}]`
+
+      let expPartys = expParty.value.split(' ')
+      expPart = '[u]Участники:[/u] [link' + expCol.value + '] [' + expCol.value + ']'
+      if (expPartys[1]) {
+      for (let j = 0; j < expPartys.length; j++) {
+         expPart = expPart + ', [link' + expPartys[j] + '] [' + expPartys[j] + ']'
+      }}
+
+      let report = `${expData}\n${title}\n${collect}\n${expPart}`
+
+      expReport.value = report
+      
+      expReport.style.height = 'auto';
+      expReport.style.height = `${expReport.scrollHeight}px`;
+
+      localStorage.id = expCol.value
+   }
+}
+
+expOK.onclick = makeexp
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
@@ -874,3 +924,4 @@ docCopy.onclick = copyReport.bind(docReport)
 medalCopy.onclick = copyReport.bind(medalReport)
 navCopy.onclick = copyReport.bind(navReport)
 grushCopy.onclick = copyReport.bind(grushReport)
+expCopy.onclick = copyReport.bind(expReport)

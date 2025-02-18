@@ -2,6 +2,12 @@ body {
    margin: 0; padding: 0;
    background-image: url(img/46bd986038ce.png);
 }
+html {
+   scroll-behavior: smooth;
+ }
+ :target {
+   scroll-margin-top: 20vh; /* 50vh - половина высоты экрана */
+ }
 h1, h2, h3 {
    margin: 0; padding: 0;
 }
