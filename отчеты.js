@@ -845,7 +845,7 @@ let maketrof = function() {
          dokva += ` [[url=${scrs[j]}]${j+1}[/url]]`
       }
 
-      trofReport.value = `[b]Запрос трофея[/b]\nЯ, ${troferName.value} [${trofID.value}], ${trofDol.value} шайки, выполнил(а) требования на медаль «${trofGroups[trofGr.value].lastChild.value}».\n${dokva}`
+      trofReport.value = `[b]Запрос трофея[/b]\nЯ, ${troferName.value} [${trofID.value}], ${trofDol.value} шайки, выполнил(а) требования на трофей «${trofGroups[trofGr.value].lastChild.value}».\n${dokva}`
       
       trofReport.style.height = 'auto';
       trofReport.style.height = `${trofReport.scrollHeight}px`;
