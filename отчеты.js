@@ -13,6 +13,13 @@ if (localStorage.navShow == '1') {
 }
 }
 
+if (window.innerWidth < 1040) {
+   for (i = 0; i < nav.length; i++) { 
+      nav[i].classList.add('hidden')
+      navBtn.textContent = 'Раскрыть'
+      localStorage.navShow = 0
+   }}
+
 let showNav = function() {
    if (localStorage.navShow == '1' || navBtn.textContent == 'Скрыть') {
    for (i = 0; i < nav.length; i++) {
