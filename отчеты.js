@@ -40,6 +40,8 @@ let patCopy = document.getElementById('pat-copy')
 let timeSelect = document.getElementById('time')
 let patReport = document.getElementById('pat-report-rez')
 
+if (localStorage.id) {patCollect.value = localStorage.id}
+
 let timeOptions = ['0:00', '2:00', '4:00', '6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
 let timeOption = []
 let timeText = document.getElementById('another-time')
@@ -87,6 +89,8 @@ function makePat() {
 
       patReport.style.height = 'auto';
       patReport.style.height = `${patReport.scrollHeight}px`;
+
+      localStorage.id = patCollect.value
    }
 }
 
@@ -99,6 +103,8 @@ let watchPathIn = document.getElementById('watch-path')
 let watchOK = document.getElementById('watch-ok')
 let watchReport = document.getElementById('watch-rep-rez')
 let watchCopy = document.getElementById('watch-copy')
+
+if (localStorage.id) {whatcherIn.value = localStorage.id}
 
 function makeWhatch() {
    let allCompete
@@ -124,6 +130,8 @@ function makeWhatch() {
 
       watchReport.style.height = 'auto';
       watchReport.style.height = `${watchReport.scrollHeight}px`;
+
+      localStorage.id = whatcherIn.value
    }
 }
 
@@ -137,6 +145,8 @@ let lecReport = document.getElementById('lec-rep-rez')
 let lecCopy = document.getElementById('lec-copy')
 let typeLec = document.getElementById('lec-sel'); let typeSt = document.getElementById('st-sel')
 let nameLec = document.getElementById('lec-name'); let nameSt = document.getElementById('st-name')
+
+if (localStorage.id) {lecerIn.value = localStorage.id}
 
 let lecNames = ['Основы охоты', "Правила и кодекс", "Чрезвычайные ситуации", "Посвящения и тесты", "Боережим", "Жизнь малышей", "Территория", "Иерархия", "Техподдержка и АМС", "Ныряние и лазанье"]
 let lections = []
@@ -194,6 +204,9 @@ function makeLec() {
 
       lecReport.style.height = 'auto';
       lecReport.style.height = `${lecReport.scrollHeight}px`;
+
+      localStorage.id = lecerIn.value
+
    } else { alert('Заполни всё!') }
 }
 
@@ -226,6 +239,8 @@ let vpatOK = document.getElementById('v-pat-ok')
 let vpatCopy = document.getElementById('v-pat-copy')
 let vtimeSelect = document.getElementById('v-time')
 let vpatReport = document.getElementById('v-pat-report-rez')
+
+if (localStorage.id) {vpatCollect.value = localStorage.id}
 
 let vtimeOptions = ['1:00', '3:30', '5:00', '7:00', '9:00', '11:00', '13:00', '15:00', '19:00', '21:00', '23:00'];
 let vtimeOption = []
@@ -273,6 +288,8 @@ function vmakePat() {
 
       vpatReport.style.height = 'auto';
       vpatReport.style.height = `${vpatReport.scrollHeight}px`;
+
+      localStorage.id = vpatCollect.value
    }
 }
 
@@ -285,6 +302,8 @@ let gameParty = document.getElementById('g-party')
 let gameOK = document.getElementById('g-ok')
 let gameReport = document.getElementById('g-rep-rez')
 let gameCopy = document.getElementById('g-copy')
+
+if (localStorage.id) {gamerIn.value = localStorage.id}
 
 function makeGame() {
    let allCompete
@@ -318,6 +337,8 @@ function makeGame() {
       gameReport.style.height = 'auto';
       gameReport.style.height = `${gameReport.scrollHeight}px`;
 
+      localStorage.id = gamerIn.value
+
    }      
 }
 
@@ -333,6 +354,8 @@ let dReport = document.getElementById('d-rep-rez')
 let dCopy = document.getElementById('d-copy')
 let pasSel = document.getElementById('pas-sel'); let actSel = document.getElementById('act-sel')
 let pasD = document.getElementById('pas-path'); let actD = document.getElementById('act-path')
+
+if (localStorage.id) {dIn.value = localStorage.id}
 
 dSelect = function() {
    if (this == 'pas') {
@@ -377,6 +400,8 @@ function makeD() {
 
       dReport.style.height = 'auto';
       dReport.style.height = `${dReport.scrollHeight}px`;
+
+      localStorage.id = dIn.value
    }
 }
 
@@ -388,6 +413,7 @@ let travOK = document.getElementById('trav-ok')
 let travReport = document.getElementById('trav-rep-rez')
 let travCopy = document.getElementById('trav-copy')
 
+if (localStorage.id) {travCol.value = localStorage.id}
 
 function makeTrav() {
    let allCompete
@@ -423,6 +449,8 @@ function makeTrav() {
       
       travReport.style.height = 'auto';
       travReport.style.height = `${travReport.scrollHeight}px`;
+
+      localStorage.id = travCol.value
    }
 }
 
@@ -434,6 +462,8 @@ let docPom = document.getElementById("doc-pom")
 let docOK = document.getElementById("doc-ok")
 let docReport = document.getElementById("doc-rep-rez")
 let docCopy = document.getElementById("doc-copy")
+
+if (localStorage.id) {docCol.value = localStorage.id}
 
 function makeDoc() {
    let allCompete
@@ -466,7 +496,7 @@ function makeDoc() {
       }
       players = `[u]Участники:[/u] ${players}`
 
-      let pom = '[u]Помощники:[/u] '
+      let pom = '[u]Помощники:[/u]'
       if (docPom.value) {
          let poms = docPom.value.split(' ');
          pom += `[link${poms[0]}] [${poms[0]}]`
@@ -483,6 +513,8 @@ function makeDoc() {
  
       docReport.style.height = 'auto';
       docReport.style.height = `${docReport.scrollHeight}px`;
+
+      localStorage.id = docCol.value
    }
 }
 
@@ -497,6 +529,12 @@ let medalOK = document.getElementById('m-ok');
 let medalReport = document.getElementById('m-rep-rez');
 let medalCopy = document.getElementById('m-copy');
 let medalScr = document.getElementById('m-scr')
+
+if (localStorage.id) {medalID.value = localStorage.id}
+if (localStorage.name) {medalerName.value = localStorage.name}
+for (j = 1; j < 10; j++) {
+   if (localStorage.dol == medalDol.childNodes[j].value) {medalDol.childNodes[j].selected = true}
+}
 
 let mMedals = ['Юный активист', 'Непревзойденный активист', 'Юный непоседа', 'Неповторимый непоседа', 'Юный страж', 'Превосходный страж']
 let nMedals = ['Острые когти', 'Умелый боец', 'Покоритель волн', 'Покоривший море', 'Покоритель вершин', 'Покоривший солёные скалы', 'Археолог-любитель', 'Великий кладоискатель', 'Собачий нюх', 'Совершенное чутьё']
@@ -581,6 +619,10 @@ let makeMedal = function() {
       
       medalReport.style.height = 'auto';
       medalReport.style.height = `${medalReport.scrollHeight}px`;
+
+      localStorage.id = medalID.value;
+      localStorage.name = medalerName.value;
+      localStorage.dol = medalDol.value
    }
 }
 
@@ -592,6 +634,8 @@ let navScr = document.getElementById('nav-scr')
 let navOK = document.getElementById('nav-ok')
 let navReport = document.getElementById('nav-rep-rez')
 let navCopy = document.getElementById('nav-copy')
+
+if (localStorage.id) {navID.value = localStorage.id}
 
 let makeNav = function() {
    let allCompete = true
@@ -633,6 +677,8 @@ let makeNav = function() {
       
       navReport.style.height = 'auto';
       navReport.style.height = `${navReport.scrollHeight}px`;
+
+      localStorage.id = navID.value
    }
 }
 
@@ -647,6 +693,8 @@ let grushM = document.getElementById('grush-m')
 let grushOK = document.getElementById('grush-ok')
 let grushReport = document.getElementById('grush-rep-rez')
 let grushCopy = document.getElementById('grush-copy');
+
+if (localStorage.id) {grushID.value = localStorage.id}
 
 let grushShow = function(a) {
    if (a == 'МГ') {
@@ -718,6 +766,8 @@ let min = differenceInMinutes % 60;
 
    grushReport.style.height = 'auto';
    grushReport.style.height = `${grushReport.scrollHeight}px`;
+
+   localStorage.id = grushID.value
    }
 }
 
@@ -733,6 +783,12 @@ let trofOK = document.getElementById('trof-ok');
 let trofReport = document.getElementById('trof-rep-rez');
 let trofCopy = document.getElementById('trof-copy');
 let trofScr = document.getElementById('trof-scr')
+
+if (localStorage.id) {trofID.value = localStorage.id}
+if (localStorage.name) {troferName.value = localStorage.name}
+for (j = 1; j < 10; j++) {
+   if (localStorage.dol == trofDol.childNodes[j].value) {trofDol.childNodes[j].selected = true}
+}
 
 let otrofs = ['Треклятый дублон', 'Кинжал триумфа', 'Медный компас', 'Верный путь', 'Записки краболова', 'Жаба', 'Мешок с золотом','Созвездие морского конька','Созвездие акулы','Созвездие дельфина','Созвездие косатки','Созвездие осьминога','Созвездие мурены','Созвездие ската','Созвездие черепахи','Созвездие крылатки','Созвездие медузы','Созвездие летучей рыбы','Созвездие марлина','Созвездие нарвала','Созвездие кита']
 let otrtrofs = ['Задорный компаньон','Безупречность осьминога','Китовая забота','Неугомонность чайки','Акулья свирепость','Рыбья задорность','Черепашья мудрость','Прирождëнный творец','Коралловый хохотун','Рубиновый глаз','Красноречивый рассказчик','Задорность малька','Путеводная звезда']
@@ -793,6 +849,10 @@ let maketrof = function() {
       
       trofReport.style.height = 'auto';
       trofReport.style.height = `${trofReport.scrollHeight}px`;
+      
+      localStorage.id = trofID.value;
+      localStorage.name = troferName.value;
+      localStorage.dol = trofDol.value
    }
 }
 
