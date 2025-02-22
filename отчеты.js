@@ -18,6 +18,7 @@ if (window.innerWidth < 1040) {
       nav[i].classList.add('hidden')
       navBtn.textContent = 'Раскрыть'
       localStorage.navShow = 0
+      // nav[i].style.width = window.innerWidth
    }}
 
 let showNav = function() {
@@ -915,6 +916,81 @@ function makeexp() {
 
 expOK.onclick = makeexp
 
+let oxCol = document.getElementById("ox-col");
+let oxVed = document.getElementById("ox-ved")
+let oxPartys = document.getElementById("ox-p")
+let oxPom = document.getElementById("ox-pom")
+let oxOK = document.getElementById("ox-ok")
+let oxReport = document.getElementById("ox-rep-rez")
+let oxCopy = document.getElementById("ox-copy")
+let oxTime = document.getElementById("ox-time")
+
+let oxTimes = ['00:00','2:00','4:00','6:00','10:00','14:00','18:00','22:00']
+let oxTimesOpt = []
+for (let i = 0; i < oxTimes.length; i++) {
+   oxTimesOpt[i] = document.createElement('option')
+   oxTimesOpt[i].textContent = oxTimes[i]
+   oxTimesOpt[i].value = oxTimes[i]
+   oxTime.append(oxTimesOpt[i])
+}
+
+if (localStorage.id) {oxCol.value = localStorage.id; oxVed.value = localStorage.id}
+
+function makeox() {
+   let allCompete
+   if (!oxCol.value && !oxPartys.value.length) {
+      allCompete = false;
+      alert('Заполни всё!')
+   } else {
+      allCompete = true
+   }
+
+   if (allCompete) {
+      let data = new Date;
+      let month = data.getMonth() + 1;
+      if (month.toString().length == 1) {
+         month = `0${month}`
+      }
+      let oxData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+
+      let collect = `Собирающий: [link${oxCol.value}] [${oxCol.value}]`
+
+      let part = oxPartys.value.split(' ')
+      let players = ''
+      players += `[link${part[0]}] [${part[0]}] (${part[1]})`
+      if (part.length > 2) {
+         let j = 2
+       while (j < part.length) {
+         players += `, [link${part[j]}] [${part[j]}] (${part[j+1]})`
+         j += 2
+       }
+      }
+      players = `Участники: ${players}`
+
+      let pom = 'Помощники:'
+      if (oxPom.value) {
+         let poms = oxPom.value.split(' ');
+         pom += `[link${poms[0]}] [${poms[0]}]`
+         if (poms[1]) {
+         for (h = 1; h < poms.length; h++) {
+            pom += `, [link${poms[h]}] [${poms[h]}]`
+         }
+      }
+      } else {
+         pom = `${pom} -`
+      }
+
+      oxReport.value = `${oxData}\n[b]Охотничий патруль.[/b]\nВремя сбора: ${oxTime.value}\n${collect}\nВедущий: [link${oxVed.value}] [${oxVed.value}]\n${players}\n${pom}`
+ 
+      oxReport.style.height = 'auto';
+      oxReport.style.height = `${oxReport.scrollHeight}px`;
+
+      localStorage.id = oxCol.value
+   }
+}
+
+oxOK.onclick = makeox;
+
 let copyReport = function() {
    this.select();
    document.execCommand("copy")
@@ -932,3 +1008,4 @@ medalCopy.onclick = copyReport.bind(medalReport)
 navCopy.onclick = copyReport.bind(navReport)
 grushCopy.onclick = copyReport.bind(grushReport)
 expCopy.onclick = copyReport.bind(expReport)
+oxCopy.onclick = copyReport.bind(oxReport)
