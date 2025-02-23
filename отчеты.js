@@ -193,16 +193,22 @@ function makeLec() {
       let party = lecParty.value.split(' ')
       let players = ''
       if (typeLec.checked) {
-      for (j = 0; j < party.length; j++) {
+      if (party[0].substr(-1,1) == 'м') {
+         players += `[link${party[0].substr(0,party[0].length - 1)}] [${party[0].substr(0,party[0].length - 1)}] (+35 монет)`
+      } else {
+         players += `[link${party[0]}] [${party[0]}] (+20 монет)`
+      }
+      for (j = 1; j < party.length; j++) {
          if (party[j].substr(-1,1) == 'м') {
-            players += `[link${party[j].substr(0,party[j].length - 1)}] [${party[j].substr(0,party[j].length - 1)}] (+35 монет) `
+            players += `, [link${party[j].substr(0,party[j].length - 1)}] [${party[j].substr(0,party[j].length - 1)}] (+35 монет)`
          } else {
-            players += `[link${party[j]}] [${party[j]}] (+20 монет) `
+            players += `, [link${party[j]}] [${party[j]}] (+20 монет)`
          }
       }
       } else if (typeSt.checked) {
-         for (j = 0; j < party.length; j++) {
-            players = players + `[link${party[j]}] [${party[j]}] (+20 монет) `
+         players = players + `[link${party[0]}] [${party[0]}] (+20 монет)`
+         for (j = 1; j < party.length; j++) {
+            players = players + `, [link${party[j]}] [${party[j]}] (+20 монет)`
          }
       }
       players = `[b]Участники:[/b] ${players}`
