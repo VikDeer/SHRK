@@ -194,8 +194,11 @@ function makeLec() {
       let players = ''
       if (typeLec.checked) {
       for (j = 0; j < party.length; j++) {
-         let arr = party[j].split('+')
-         players = players + `[link${arr[0]}] [${arr[0]}] (+${arr[1]} монет) `
+         if (party[j].substr(-1,1) == 'м') {
+            players += `[link${party[j]}] [${party[j]}] (+35 монет) `
+         } else {
+            players += `[link${party[j]}] [${party[j]}] (+20 монет) `
+         }
       }
       } else if (typeSt.checked) {
          for (j = 0; j < party.length; j++) {
@@ -231,7 +234,7 @@ function displayLec() {
    } else if (this == 'лекция') {
       nameLec.classList.remove('hidden')
       nameSt.classList.add('hidden')
-      lecParty.placeholder = "1568535+10 1629378+20"
+      lecParty.placeholder = "1568535м 1629378"
    }
 }
 
