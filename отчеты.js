@@ -195,7 +195,7 @@ function makeLec() {
       if (typeLec.checked) {
       for (j = 0; j < party.length; j++) {
          if (party[j].substr(-1,1) == 'м') {
-            players += `[link${party[j]}] [${party[j]}] (+35 монет) `
+            players += `[link${party[j].substr(0,party[j].length - 1)}] [${party[j].substr(0,party[j].length - 1)}] (+35 монет) `
          } else {
             players += `[link${party[j]}] [${party[j]}] (+20 монет) `
          }
