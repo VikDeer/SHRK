@@ -957,10 +957,15 @@ function makeox() {
    if (allCompete) {
       let data = new Date;
       let month = data.getMonth() + 1;
+      let day = data.getDate()
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let oxData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      console.log(day)
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let oxData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
 
       let collect = `Собирающий: [link${oxCol.value}] [${oxCol.value}]`
 
