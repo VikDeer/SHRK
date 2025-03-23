@@ -73,27 +73,27 @@ function makePat() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      patData = '[b]Дата проведения лагерного патруля:[/b] ' + data.getDate() + '.' + month + '.' + data.getFullYear().toString().substr(2,2);
+      patData = '[b]Лагерный патруль,[/b] ' + data.getDate() + '.' + month + '.' + data.getFullYear().toString().substr(2,2);
       
       if (timeText.value) { patTime = '[b]Время сбора:[/b] ' + timeText.value }
-      else { patTime = '[b]Время сбора:[/b] ' + timeSelect.value }
+      else { patTime = '[b]Время:[/b] ' + timeSelect.value }
       
       patCollecting = '[b]Собирающий:[/b] [link' + patCollect.value + '] [' + patCollect.value + ']'
       
       let patLeaders = patLeader.value.split(' ')
-      patLeading = '[b]Ведущий(ие):[/b] [link' + patLeaders[0] + '] [' + patLeaders[0] + ']'
-      if (patLeaders[1]) {patLeading = patLeading + ', [link' + patLeaders[1] + '] [' + patLeaders[1] + ']'}
+      patLeading = '[link' + patLeaders[0] + '] [' + patLeaders[0] + '] (ведущий)'
+      if (patLeaders[1]) {patLeading = patLeading + ', [link' + patLeaders[1] + '] [' + patLeaders[1] + '] (ведущий)'}
+
+      let patPartys = patPart.value.split(' ')
+      patParty = '[b]Участники:[/b] ' + patLeading
 
       if (patPart.value) {
-      let patPartys = patPart.value.split(' ')
-      patParty = '[b]Участники:[/b] [link' + patPartys[0] + '] [' + patPartys[0] + ']'
-      for (let j = 1; j < patPartys.length; j++) {
+      for (let j = 0; j < patPartys.length; j++) {
          patParty = patParty + ', [link' + patPartys[j] + '] [' + patPartys[j] + ']'
-      }
-   } else {patParty = '[b]Участники:[/b] -'}
+      }}
       
 
-      patReport.value = `${patData}\n[b]Отчёт о проведении лагерного патруля:[/b]\n${patTime}\n${patCollecting}\n${patLeading}\n${patParty}`
+      patReport.value = `${patData}\n${patTime}\n${patCollecting}\n${patParty}`
 
       patReport.style.height = 'auto';
       patReport.style.height = `${patReport.scrollHeight}px`;
@@ -126,15 +126,69 @@ function makeWhatch() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let watchData = `[b]Дата проведения лагерного дозора:[/b] ${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let watchData = `[b]Лагерный дозор,[/b] ${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
 
-      let watchHours = `[b]Часы дозора:[/b] ${watchStart.value} - ${watchEnd.value}`
+      function calculateTimeDifference(startTime, endTime) {
+         // Разбиваем строки времени на часы и минуты
+         const [startHours, startMinutes] = startTime.split(':').map(Number);
+         const [endHours, endMinutes] = endTime.split(':').map(Number);
+     
+         // Переводим время в минуты с начала дня
+         const startTotalMinutes = startHours * 60 + startMinutes;
+         const endTotalMinutes = endHours * 60 + endMinutes;
+     
+         // Проверяем, переходит ли время на следующий день
+         let diffMinutes;
+         if (endTotalMinutes > startTotalMinutes) {
+             // Если конечное время больше начального, просто вычисляем разницу
+             diffMinutes = endTotalMinutes - startTotalMinutes;
+         } else {
+             // Если конечное время меньше начального (переход через полночь)
+             diffMinutes = (24 * 60 - startTotalMinutes) + endTotalMinutes;
+         }
+     
+         // Переводим разницу обратно в часы и минуты
+         const hours = Math.floor(diffMinutes / 60);
+         const minutes = diffMinutes % 60;
+     
+         return { hours, minutes };
+     }
+     
+     const result = calculateTimeDifference(watchStart.value, watchEnd.value);
+     let h, m
 
-      let watcher = `[b]Дозорный:[/b] [link${whatcherIn.value}] [${whatcherIn.value}]`
+     if (result.hours == 0) {
+      h = ``
+     } else if (result.hours == 1) {
+      h = `${result.hours} час`
+     } else if (result.hours < 5) {
+      h = `${result.hours} часа`
+     } else {
+      h = `${result.hours} часов`
+     }
+
+     if (result.minutes == 0) {
+      m = ``
+     } else if (result.minutes == 1) {
+      m = `${result.minutes} минута`
+     } else if (result.minutes < 5) {
+      m = `${result.minutes} минуты`
+     } else {
+      m = `${result.minutes} минут`
+     }
+     if (m.length && h.length) {
+      h += ` `
+     }
+
+     console.log(m.length, h.length);
+
+      let watchHours = `[b]Время:[/b] ${watchStart.value} - ${watchEnd.value} (${h}${m})`
+
+      let watcher = `[b]Участник:[/b] [link${whatcherIn.value}] [${whatcherIn.value}]`
 
       let watchPath = `[b]Маршрут:[/b] ${watchPathIn.value}`
 
-      watchReport.value = `${watchData}\n[b]Отчёт о проведении лагерного дозора:[/b]\n${watchHours}\n${watcher}\n${watchPath}`
+      watchReport.value = `${watchData}\n${watchHours}\n${watcher}\n${watchPath}`
 
       watchReport.style.height = 'auto';
       watchReport.style.height = `${watchReport.scrollHeight}px`;
@@ -981,7 +1035,7 @@ function makeox() {
       }
       players = `Участники: ${players}`
 
-      let pom = 'Помощники: '
+      let pom = 'Помощники:'
       if (oxPom.value) {
          let poms = oxPom.value.split(' ');
          pom += `[link${poms[0]}] [${poms[0]}]`
