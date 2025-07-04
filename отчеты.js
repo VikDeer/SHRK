@@ -73,7 +73,11 @@ function makePat() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      patData = '[b]Лагерный патруль,[/b] ' + data.getDate() + '.' + month + '.' + data.getFullYear().toString().substr(2,2);
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      patData = '[b]Лагерный патруль,[/b] ' + day + '.' + month + '.' + data.getFullYear().toString().substr(2,2);
       
       if (timeText.value) { patTime = '[b]Время сбора:[/b] ' + timeText.value }
       else { patTime = '[b]Время:[/b] ' + timeSelect.value }
@@ -126,7 +130,11 @@ function makeWhatch() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let watchData = `[b]Лагерный дозор,[/b] ${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let watchData = `[b]Лагерный дозор,[/b] ${day}.${month}.${data.getFullYear().toString().substr(2,2)}`
 
       function calculateTimeDifference(startTime, endTime) {
          // Разбиваем строки времени на часы и минуты
@@ -180,8 +188,6 @@ function makeWhatch() {
       h += ` `
      }
 
-     console.log(m.length, h.length);
-
       let watchHours = `[b]Время:[/b] ${watchStart.value} - ${watchEnd.value} (${h}${m})`
 
       let watcher = `[b]Участник:[/b] [link${whatcherIn.value}] [${whatcherIn.value}]`
@@ -233,7 +239,11 @@ function makeLec() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let lecData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)} | ${lecStart.value}[/b]`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let lecData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)} | ${lecStart.value}[/b]`
 
       let lector = `[b]Ведущий:[/b] [link${lecerIn.value}] [${lecerIn.value}]`
 
@@ -336,7 +346,11 @@ function vmakePat() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      vpatData = '[b]' + data.getDate() + '.' + month + '.' + data.getFullYear().toString().substr(2,2) + '[/b]';
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      vpatData = '[b]' + day + '.' + month + '.' + data.getFullYear().toString().substr(2,2) + '[/b]';
       
       vpatTime = 'Время сбора: ' + vtimeSelect.value
       
@@ -388,7 +402,11 @@ function makeGame() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let gameData = `[b]Дата проведения игр:[/b] ${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let gameData = `[b]Дата проведения игр:[/b] ${day}.${month}.${data.getFullYear().toString().substr(2,2)}`
 
       let start = `[b]Время начала:[/b] ${gameStart.value}`
       let end = `[b]Время окончания:[/b] ${gameEnd.value}`
@@ -454,7 +472,11 @@ function makeD() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let dData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let dData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
 
       let dHours = `Часы дозора: ${dStart.value} - ${dEnd.value}`
 
@@ -502,7 +524,11 @@ function makeTrav() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let travData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let travData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
 
       let title = `[b]Отчёт о ${what.value}[/b]`
 
@@ -551,7 +577,11 @@ function makeDoc() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let docData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let docData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
 
       let collect = `[u]Собирающий:[/u] [link${docCol.value}] [${docCol.value}]`
 
@@ -722,7 +752,11 @@ let makeNav = function() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let navData = `${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let navData = `${day}.${month}.${data.getFullYear().toString().substr(2,2)}`
 
 
    let scr
@@ -790,7 +824,11 @@ let makeGrush = function() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let grushData = `${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let grushData = `${day}.${month}.${data.getFullYear().toString().substr(2,2)}`
 
       let start = grushStart.value.split(':'); let end = grushEnd.value.split(':')
       let startInMinutes = start[0] * 60 + start[1] * 1;
@@ -953,7 +991,11 @@ function makeexp() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      let expData = `[b]${data.getDate()}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let day = data.getDate()
+      if (day.toString().length == 1) {
+         day = `0${day}`
+      }
+      let expData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
 
       let title = `[b]Отчёт о ${what.value} экспедиции[/b]`
 
@@ -961,7 +1003,7 @@ function makeexp() {
 
       let expPartys = expParty.value.split(' ')
       expPart = '[u]Участники:[/u] [link' + expCol.value + '] [' + expCol.value + ']'
-      if (expPartys[1]) {
+      if (expPartys[0]) {
       for (let j = 0; j < expPartys.length; j++) {
          expPart = expPart + ', [link' + expPartys[j] + '] [' + expPartys[j] + ']'
       }}
@@ -1015,7 +1057,6 @@ function makeox() {
       if (month.toString().length == 1) {
          month = `0${month}`
       }
-      console.log(day)
       if (day.toString().length == 1) {
          day = `0${day}`
       }
@@ -1035,7 +1076,7 @@ function makeox() {
       }
       players = `Участники: ${players}`
 
-      let pom = 'Помощники: '
+      let pom = 'Помощники:'
       if (oxPom.value) {
          let poms = oxPom.value.split(' ');
          pom += `[link${poms[0]}] [${poms[0]}]`
