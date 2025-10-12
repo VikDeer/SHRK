@@ -1,3 +1,7 @@
+let date = new Date()
+let hours = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', hour: '2-digit' });
+let minutes = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', minute: '2-digit' });
+let nowTime = hours*60 + minutes*1
 
 let nav = document.querySelectorAll('.nav li')
 let navBtn = document.querySelector('.nav button')
@@ -51,14 +55,19 @@ let patReport = document.getElementById('pat-report-rez')
 if (localStorage.id) {patCollect.value = localStorage.id}
 
 let timeOptions = ['0:00', '2:00', '4:00', '6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
+let closetTimeOption = closetTime(timeOptions)
 let timeOption = []
 let timeText = document.getElementById('another-time')
 for (let i = 0; i < timeOptions.length; i++) {
    timeOption[i] = document.createElement('option')
    timeOption[i].textContent = timeOptions[i]
    timeOption[i].value = timeOptions[i]
+   if (timeOption[i].value == closetTimeOption) {
+      timeOption[i].selected = true
+   }
    timeSelect.append(timeOption[i])
 }
+
 
 function makePat() {
    let allCompete
@@ -68,16 +77,12 @@ function makePat() {
    
    if (allCompete) {
       patLeading = ''; patParty = ''
-      let data = new Date;
-      let month = data.getMonth() + 1
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      patData = '[b]Лагерный патруль,[/b] ' + day + '.' + month + '.' + data.getFullYear().toString().substr(2,2);
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      patData = '[b]Лагерный патруль,[/b] ' + day + '.' + month + '.' + year;
       
       if (timeText.value) { patTime = '[b]Время сбора:[/b] ' + timeText.value }
       else { patTime = '[b]Время:[/b] ' + timeSelect.value }
@@ -125,16 +130,12 @@ function makeWhatch() {
    } else { alert('Заполни всё!')}
    
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let watchData = `[b]Лагерный дозор,[/b] ${day}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let watchData = `[b]Лагерный дозор,[/b] ${day}.${month}.${year}`
 
       function calculateTimeDifference(startTime, endTime) {
          // Разбиваем строки времени на часы и минуты
@@ -234,16 +235,12 @@ function makeLec() {
    }
    
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let lecData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)} | ${lecStart.value}[/b]`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let lecData = `[b]${day}.${month}.${year} | ${lecStart.value}[/b]`
 
       let lector = `[b]Ведущий:[/b] [link${lecerIn.value}] [${lecerIn.value}]`
 
@@ -323,15 +320,20 @@ let vpatReport = document.getElementById('v-pat-report-rez')
 
 if (localStorage.id) {vpatCollect.value = localStorage.id}
 
-let vtimeOptions = ['1:00', '3:30', '5:00', '7:00', '9:00', '11:00', '13:00', '15:00', '19:00', '21:00', '23:00'];
+let vtimeOptions = ['3:00', '7:00', '11:00', '15:00', '19:00', '23:00'];
+let closetvtimeOptions = closetTime(vtimeOptions)
 let vtimeOption = []
 let vtimeText = document.getElementById('v-another-time')
 for (let i = 0; i < vtimeOptions.length; i++) {
    vtimeOption[i] = document.createElement('option')
    vtimeOption[i].textContent = vtimeOptions[i]
    vtimeOption[i].value = vtimeOptions[i]
+   if (vtimeOption[i].value == closetvtimeOptions) {
+      vtimeOption[i].selected = true
+   }
    vtimeSelect.append(vtimeOption[i])
 }
+
 
 function vmakePat() {
    let allCompete
@@ -341,16 +343,13 @@ function vmakePat() {
    
    if (allCompete) {
       vpatLeading = ''; vpatParty = ''
-      let data = new Date;
-      let month = data.getMonth() + 1
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      vpatData = '[b]' + day + '.' + month + '.' + data.getFullYear().toString().substr(2,2) + '[/b]';
+      
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      vpatData = '[b]' + day + '.' + month + '.' + year + '[/b]';
       
       vpatTime = 'Время сбора: ' + vtimeSelect.value
       
@@ -397,16 +396,12 @@ function makeGame() {
    } else { alert('Заполни всё!')}
    
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let gameData = `[b]Дата проведения игр:[/b] ${day}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let gameData = `[b]Дата проведения игр:[/b] ${day}.${month}.${year}`
 
       let start = `[b]Время начала:[/b] ${gameStart.value}`
       let end = `[b]Время окончания:[/b] ${gameEnd.value}`
@@ -467,16 +462,12 @@ function makeD() {
    } else { alert('Заполни всё!')}
    
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let dData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let dData = `[b]${day}.${month}.${year}[/b]`
 
       let dHours = `Часы дозора: ${dStart.value} - ${dEnd.value}`
 
@@ -519,16 +510,12 @@ function makeTrav() {
    }
 
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let travData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let travData = `[b]${day}.${month}.${year}[/b]`
 
       let title = `[b]Отчёт о ${what.value}[/b]`
 
@@ -572,16 +559,12 @@ function makeDoc() {
    }
 
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let docData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let docData = `[b]${day}.${month}.${year}[/b]`
 
       let collect = `[u]Собирающий:[/u] [link${docCol.value}] [${docCol.value}]`
 
@@ -746,17 +729,12 @@ let makeNav = function() {
    }
 
    if (allCompete) {
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
 
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let navData = `${day}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let navData = `${day}.${month}.${year}`
 
 
    let scr
@@ -819,16 +797,12 @@ let makeGrush = function() {
    }
 
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let grushData = `${day}.${month}.${data.getFullYear().toString().substr(2,2)}`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let grushData = `${day}.${month}.${year}`
 
       let start = grushStart.value.split(':'); let end = grushEnd.value.split(':')
       let startInMinutes = start[0] * 60 + start[1] * 1;
@@ -986,16 +960,12 @@ function makeexp() {
    }
 
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      let day = data.getDate()
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let expData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let expData = `[b]${day}.${month}.${year}[/b]`
 
       let title = `[b]Отчёт о ${what.value} экспедиции[/b]`
 
@@ -1030,12 +1000,16 @@ let oxReport = document.getElementById("ox-rep-rez")
 let oxCopy = document.getElementById("ox-copy")
 let oxTime = document.getElementById("ox-time")
 
-let oxTimes = ['2:00','4:00','6:00','10:00','14:00','18:00','22:00']
+let oxTimes = ['2:00','6:00','10:00','14:00','18:00','22:00']
+let closetoxTimes = closetTime(oxTimes)
 let oxTimesOpt = []
 for (let i = 0; i < oxTimes.length; i++) {
    oxTimesOpt[i] = document.createElement('option')
    oxTimesOpt[i].textContent = oxTimes[i]
    oxTimesOpt[i].value = oxTimes[i]
+   if (oxTimesOpt[i].value == closetoxTimes) {
+      oxTimesOpt[i].selected = true
+   }
    oxTime.append(oxTimesOpt[i])
 }
 
@@ -1051,16 +1025,12 @@ function makeox() {
    }
 
    if (allCompete) {
-      let data = new Date;
-      let month = data.getMonth() + 1;
-      let day = data.getDate()
-      if (month.toString().length == 1) {
-         month = `0${month}`
-      }
-      if (day.toString().length == 1) {
-         day = `0${day}`
-      }
-      let oxData = `[b]${day}.${month}.${data.getFullYear().toString().substr(2,2)}[/b]`
+      let date = new Date;
+      let day = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day: '2-digit' });
+      let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
+      let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
+
+      let oxData = `[b]${day}.${month}.${year}[/b]`
 
       let collect = `Собирающий: [link${oxCol.value}] [${oxCol.value}]`
 
@@ -1122,3 +1092,23 @@ expCopy.onclick = copyReport.bind(expReport)
 oxCopy.onclick = copyReport.bind(oxReport)
 
 
+function closetTime(arr) {
+   let timeDif = Infinity;
+   let closetTimeResult;
+
+   for (let i = 0; i < arr.length; i++) {
+       let t = arr[i]; // "14:00"
+       let ts = t.split(':'); // ["14", "00"]
+       let tm = ts[0]*60 + ts[1]*1; // Преобразуем в минуты
+
+       let diff1 = Math.abs(tm - nowTime); // Прямая разница в минутах
+       let diff2 = 1440 - diff1; // Разница через полночь
+       let diff = Math.min(diff1, diff2); // наименьшая разница между двумя временами
+
+       if (diff < timeDif) {
+           timeDif = diff; // Обновляем минимальную разницу
+           closetTimeResult = t; // Обновляем время, которое дало эту разницу
+       }
+   }
+   return closetTimeResult;
+}
