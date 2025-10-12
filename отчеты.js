@@ -597,7 +597,7 @@ function makeDoc() {
       }
       players = `[u]Участники:[/u] ${players}`
 
-      let pom = '[u]Помощники:[/u]'
+      let pom = '[u]Помощники:[/u] '
       if (docPom.value) {
          let poms = docPom.value.split(' ');
          pom += `[link${poms[0]}] [${poms[0]}]`
@@ -1076,7 +1076,7 @@ function makeox() {
       }
       players = `Участники: ${players}`
 
-      let pom = 'Помощники:'
+      let pom = 'Помощники: '
       if (oxPom.value) {
          let poms = oxPom.value.split(' ');
          pom += `[link${poms[0]}] [${poms[0]}]`
@@ -1120,3 +1120,4 @@ grushCopy.onclick = copyReport.bind(grushReport)
 expCopy.onclick = copyReport.bind(expReport)
 
 oxCopy.onclick = copyReport.bind(oxReport)
+
