@@ -506,7 +506,7 @@ let travOK = document.getElementById('trav-ok')
 let travReport = document.getElementById('trav-rep-rez')
 let travCopy = document.getElementById('trav-copy')
 
-if (localStorage.id) {travCol.value = localStorage.id}
+if (localStorage.id) {travCol.value = localStorage.id; travParty.value = localStorage.id}
 
 function makeTrav() {
    let allCompete
@@ -1120,4 +1120,5 @@ grushCopy.onclick = copyReport.bind(grushReport)
 expCopy.onclick = copyReport.bind(expReport)
 
 oxCopy.onclick = copyReport.bind(oxReport)
+
 
