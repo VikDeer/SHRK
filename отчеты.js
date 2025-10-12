@@ -1030,7 +1030,7 @@ let oxReport = document.getElementById("ox-rep-rez")
 let oxCopy = document.getElementById("ox-copy")
 let oxTime = document.getElementById("ox-time")
 
-let oxTimes = ['00:00','2:00','4:00','6:00','10:00','14:00','18:00','22:00']
+let oxTimes = ['2:00','4:00','6:00','10:00','14:00','18:00','22:00']
 let oxTimesOpt = []
 for (let i = 0; i < oxTimes.length; i++) {
    oxTimesOpt[i] = document.createElement('option')
@@ -1039,7 +1039,7 @@ for (let i = 0; i < oxTimes.length; i++) {
    oxTime.append(oxTimesOpt[i])
 }
 
-if (localStorage.id) {oxCol.value = localStorage.id; oxVed.value = localStorage.id}
+if (localStorage.id) {oxCol.value = localStorage.id; oxVed.value = localStorage.id, oxPartys.value = localStorage.id}
 
 function makeox() {
    let allCompete
@@ -1118,4 +1118,5 @@ trofCopy.onclick = copyReport.bind(trofReport)
 navCopy.onclick = copyReport.bind(navReport)
 grushCopy.onclick = copyReport.bind(grushReport)
 expCopy.onclick = copyReport.bind(expReport)
+
 oxCopy.onclick = copyReport.bind(oxReport)
