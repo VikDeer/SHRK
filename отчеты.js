@@ -771,23 +771,14 @@ let grushID = document.getElementById('grush-id');
 let grushStart = document.getElementById('grush-start');
 let grushEnd = document.getElementById('grush-end');
 let grushRole = document.getElementById('grush-role')
-let grushMH = document.getElementById('grush-m-h');
-let grushM = document.getElementById('grush-m')
+let grushAge = document.getElementById('grush-age')
 let grushOK = document.getElementById('grush-ok')
 let grushReport = document.getElementById('grush-rep-rez')
 let grushCopy = document.getElementById('grush-copy');
 
 if (localStorage.id) {grushID.value = localStorage.id}
-
-let grushShow = function(a) {
-   if (a == 'МГ') {
-      grushMH.classList.remove('hidden')
-   } else {
-      grushMH.classList.add('hidden')
-   }
-}
-
-grushRole.addEventListener('change', () => { grushShow(grushRole.value) })
+if (localStorage.grushAge == 'взрослый') {grushAge[0].selected = true}
+else if (localStorage.grushAge == 'малыш') {grushAge[1].selected = true}
 
 let makeGrush = function() {
    let allCompete = true;
@@ -841,16 +832,13 @@ let min = differenceInMinutes % 60;
       time += `${min} минут)`
    }
    
-   grushReport.value = `[b]Грушевание[/b]\n${grushData}; ${grushStart.value} - ${grushEnd.value} ${time}\n[b]${grushRole.value}:[/b] [link${grushID.value}] [${grushID.value}]`
-
-   if (grushRole.value == 'МГ') {
-      grushReport.value += ` ${grushM.value}`
-   }
+   grushReport.value = `[b]Грушевание[/b]\n${grushData}; ${grushStart.value} - ${grushEnd.value} ${time}\n[b]${grushRole.value}:[/b] [link${grushID.value}] [${grushID.value}] (${grushAge.value})`
 
    grushReport.style.height = 'auto';
    grushReport.style.height = `${grushReport.scrollHeight}px`;
 
    localStorage.id = grushID.value
+   localStorage.grushAge = grushAge.value
    }
 }
 
