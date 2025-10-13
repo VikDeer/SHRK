@@ -547,7 +547,7 @@ let docOK = document.getElementById("doc-ok")
 let docReport = document.getElementById("doc-rep-rez")
 let docCopy = document.getElementById("doc-copy")
 
-if (localStorage.id) {docCol.value = localStorage.id}
+if (localStorage.id) {docCol.value = localStorage.id; docPartys.value = localStorage.id}
 
 function makeDoc() {
    let allCompete
@@ -571,11 +571,14 @@ function makeDoc() {
       let part = docPartys.value.split(' ')
       let players = ''
       let first = part[0].split('+')
-      players += `[link${first[0]}] [${first[0]}] (+${first[1]} мышей)`
+      players += `[link${first[0]}] [${first[0]}] (+${first[1]} `
+      if (first[1] == 1) {players += `мышь)`} else if (first[1] < 5) {players += `мыши)`} else {players += `мышей)`}
       if (part.length > 0) {
       for (j = 1; j < part.length; j++) {
          let arr = part[j].split('+')
-         players = players + `, [link${arr[0]}] [${arr[0]}] (+${arr[1]} мышей)`  
+         players = players + `, [link${arr[0]}] [${arr[0]}] (+${arr[1]} `  
+         console.log(arr[1])
+         if (arr[1] == 1) {players += `мышь)`} else if (arr[1] < 5) {players += `мыши)`} else {players += `мышей)`}
       }
       }
       players = `[u]Участники:[/u] ${players}`
@@ -590,7 +593,7 @@ function makeDoc() {
          }
       }
       } else {
-         pom = `${pom} -`
+         pom += `-`
       }
 
       docReport.value = `${docData}\n[b]Отчёт о докторском патруле.[/b]\n${players}\n${collect}\n${pom}`
