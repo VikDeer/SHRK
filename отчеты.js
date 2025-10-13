@@ -1047,7 +1047,7 @@ function makeox() {
          }
       }
       } else {
-         pom = `${pom} -`
+         pom += `-`
       }
 
       oxReport.value = `${oxData}\n[b]Охотничий патруль.[/b]\nВремя сбора: ${oxTime.value}\n${collect}\nВедущий: [link${oxVed.value}] [${oxVed.value}]\n${players}\n${pom}`
@@ -1102,4 +1102,5 @@ function closetTime(arr) {
        }
    }
    return closetTimeResult;
+
 }
