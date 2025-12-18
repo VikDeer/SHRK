@@ -34,6 +34,7 @@
       <label>Собирающий: <input id='collect' type='text' placeholder="1568535"></label>
       <label>Ведущий(ие): <input id="leader" type="text" placeholder="1568535 1629378"></label>
       <label id="party-label">Участники: <input id='part' type="text" placeholder="1568535 1629378 2410"></label>
+      <label>Нарушения: <input id="nar" type="text" placeholder="нарушение1 http://d.zaix.ru/Jfvj.png, нарушение2 http://d.zaix.ru/Jfvj.png"></label>
       <button id="pat-ok">Составить отчет</button>
    </div>
    <div>
@@ -47,7 +48,8 @@
       <label>Начало: <input type="text" id="watch-start" placeholder="чч:мм"></label>
       <label>Конец: <input type="text" id="watch-end" placeholder="чч:мм"></label>
       <label>Дозорный: <input type='text' id='watcher-input' placeholder="1568535"></label>
-      <label>Маршрут: <select id="watch-path"><option>A</option><option>Б</option><option>без деления на ветви</option></select></label>
+      <label>Маршрут/локация: <select id="watch-path"><option data-type="Активный">A</option><option data-type="Активный">Б</option><option data-type="Активный">без деления на ветви</option><option data-type="Пассивный">Верхняя палуба</option><option data-type="Пассивный">Штурвал</option><option data-type="Пассивный">Подвал</option><option data-type="Пассивный">Камбуз</option><option data-type="Пассивный">Палубная рубка</option><option data-type="Пассивный">Пологий Берег</option><option data-type="Пассивный">Отдаленный Пологий Берег</option><option data-type="Пассивный">Скрытый лаз</option></select></label>
+      <label>Нарушения: <input id="watch-nar" type="text" placeholder="нарушение http://d.zaix.ru/Jfvj.png, нарушение2 http://d.zaix.ru/Jfvj.png"></label>
       <button id="watch-ok">Составить отчет</button>
    </div>
    <div>

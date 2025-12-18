@@ -50,6 +50,7 @@ let patPart = document.getElementById('part');
 let patOK = document.getElementById('pat-ok')
 let patCopy = document.getElementById('pat-copy')
 let timeSelect = document.getElementById('time')
+let patNar = document.getElementById('nar')
 let patReport = document.getElementById('pat-report-rez')
 
 if (localStorage.id) {patCollect.value = localStorage.id}
@@ -101,8 +102,21 @@ function makePat() {
          patParty = patParty + ', [link' + patPartys[j] + '] [' + patPartys[j] + ']'
       }}
       
+      let nar = `[b]Нарушения:[/b] `
+      if (patNar.value) {
+         let patNars = patNar.value.split(', ')
+         for (let i = 0; i < patNars.length; i++) {
+            narI = patNars[i].split(' ')
+            if (i > 0) {
+               nar += ', '
+            }
+            nar += `${narI[0]} [url=${narI[1]}]скриншот[/url]`
+         }
+      } else {
+         nar += '-'
+      }
 
-      patReport.value = `${patData}\n${patTime}\n${patCollecting}\n${patParty}`
+      patReport.value = `${patData}\n${patTime}\n${patCollecting}\n${patParty}\n${nar}`
 
       patReport.style.height = 'auto';
       patReport.style.height = `${patReport.scrollHeight}px`;
@@ -120,6 +134,7 @@ let watchPathIn = document.getElementById('watch-path')
 let watchOK = document.getElementById('watch-ok')
 let watchReport = document.getElementById('watch-rep-rez')
 let watchCopy = document.getElementById('watch-copy')
+let watchNar = document.getElementById('watch-nar')
 
 if (localStorage.id) {whatcherIn.value = localStorage.id}
 
@@ -135,7 +150,7 @@ function makeWhatch() {
       let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
       let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
 
-      let watchData = `[b]Лагерный дозор,[/b] ${day}.${month}.${year}`
+      let watchData = `${day}.${month}.${year}`
 
       function calculateTimeDifference(startTime, endTime) {
          // Разбиваем строки времени на часы и минуты
@@ -195,7 +210,23 @@ function makeWhatch() {
 
       let watchPath = `[b]Маршрут:[/b] ${watchPathIn.value}`
 
-      watchReport.value = `${watchData}\n${watchHours}\n${watcher}\n${watchPath}`
+      let watchType = watchPathIn.selectedOptions[0].dataset.type;
+
+      let nar = `[b]Нарушения:[/b] `
+      if (watchNar.value) {
+         let watchNars = watchNar.value.split(', ')
+         for (let i = 0; i < watchNars.length; i++) {
+            let narI = watchNars[i].split(' ')
+            if (i > 0) {
+               nar += ', '
+            }
+            nar += `${narI[0]} [url=${narI[1]}]скриншот[/url]`
+         }
+      } else {
+         nar += '-'
+      }
+
+      watchReport.value = `[b]${watchType} лагерный дозор,[/b] ${watchData}\n${watchHours}\n${watcher}\n${watchPath}\n${nar}`
 
       watchReport.style.height = 'auto';
       watchReport.style.height = `${watchReport.scrollHeight}px`;
