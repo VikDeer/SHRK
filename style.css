@@ -54,6 +54,21 @@ hr {
    overflow: hidden;
  }
 
+ .con {
+   font-size: larger;
+ }
+ .con a {
+   background-color: #e2d6ca;
+   color: black;
+   text-decoration: none;
+   border: 2px solid transparent; border-bottom: #241205 2px solid;
+   padding: 3px;
+}
+.con a:hover {
+   background-color: #c4986e;
+   border:#241205 2px solid;
+}
+
 .main {
    border-left: solid 20px transparent; border-right: solid 20px transparent;
    border-top: solid 10px transparent; border-bottom: solid 10px transparent;
