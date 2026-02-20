@@ -351,7 +351,7 @@ let vpatReport = document.getElementById('v-pat-report-rez')
 
 if (localStorage.id) {vpatCollect.value = localStorage.id}
 
-let vtimeOptions = ['3:00', '7:00', '11:00', '15:00', '19:00', '23:00'];
+let vtimeOptions = ['03:00', '07:00', '11:00', '15:00', '20:00', '23:00'];
 let closetvtimeOptions = closetTime(vtimeOptions)
 let vtimeOption = []
 let vtimeText = document.getElementById('v-another-time')
