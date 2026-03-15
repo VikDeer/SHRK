@@ -245,6 +245,8 @@ let lecReport = document.getElementById('lec-rep-rez')
 let lecCopy = document.getElementById('lec-copy')
 let typeLec = document.getElementById('lec-sel'); let typeSt = document.getElementById('st-sel')
 let nameLec = document.getElementById('lec-name'); let nameSt = document.getElementById('st-name')
+let sizeSt = document.getElementById('st-size');
+let lecTooltip = document.querySelector('.lecture span.tooltip')
 
 if (localStorage.id) {lecerIn.value = localStorage.id}
 
@@ -279,7 +281,7 @@ function makeLec() {
       if (typeLec.checked) {
          theme = `[b]Тема лекции:[/b] ${nameLec.value}`
       } else if (typeSt.checked) {
-         theme = `[b]Тема сказки:[/b] ${nameSt.value}`
+         theme = `[b]Тема/размер сказки:[/b] ${nameSt.value} (${sizeSt.querySelector('select').value.toLowerCase()})`
       }
 
       let party = lecParty.value.split(' ')
@@ -308,7 +310,7 @@ function makeLec() {
       if (typeLec.checked) {
       lecReport.value = `${lecData}\n[b]Отчёт о проведённой лекции:[/b]\n${lector}\n${theme}\n${players}`
       } else if (typeSt.checked) {
-         lecReport.value = `${lecData}\n[b]Отчёт о рассказанных сказках:[/b]\n${lector}\n${theme}\n${players}`
+         lecReport.value = `${lecData}\n[b]Отчёт о рассказанной сказке:[/b]\n${lector}\n${theme}\n${players}`
       }
 
       lecReport.style.height = 'auto';
@@ -329,10 +331,14 @@ function displayLec() {
       nameSt.classList.remove('hidden')
       nameLec.classList.add('hidden')
       lecParty.placeholder = "1568535 1629378"
+      sizeSt.classList.remove('hidden')
+      lecTooltip.classList.add('hidden')
    } else if (this == 'лекция') {
       nameLec.classList.remove('hidden')
       nameSt.classList.add('hidden')
       lecParty.placeholder = "1568535м 1629378"
+      sizeSt.classList.add('hidden')
+      lecTooltip.classList.remove('hidden')
    }
 }
 
