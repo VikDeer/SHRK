@@ -1,3 +1,29 @@
+      function calculateTimeDifference(startTime, endTime) {
+         // Разбиваем строки времени на часы и минуты
+         const [startHours, startMinutes] = startTime.split(':').map(Number);
+         const [endHours, endMinutes] = endTime.split(':').map(Number);
+     
+         // Переводим время в минуты с начала дня
+         const startTotalMinutes = startHours * 60 + startMinutes;
+         const endTotalMinutes = endHours * 60 + endMinutes;
+     
+         // Проверяем, переходит ли время на следующий день
+         let diffMinutes;
+         if (endTotalMinutes > startTotalMinutes) {
+             // Если конечное время больше начального, просто вычисляем разницу
+             diffMinutes = endTotalMinutes - startTotalMinutes;
+         } else {
+             // Если конечное время меньше начального (переход через полночь)
+             diffMinutes = (24 * 60 - startTotalMinutes) + endTotalMinutes;
+         }
+     
+         // Переводим разницу обратно в часы и минуты
+         const hours = Math.floor(diffMinutes / 60);
+         const min = diffMinutes % 60;
+     
+         return { hours, min };
+     }
+
 let date = new Date()
 let hours = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', hour: '2-digit' });
 let minutes = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', minute: '2-digit' });
@@ -151,32 +177,6 @@ function makeWhatch() {
       let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
 
       let watchData = `${day}.${month}.${year}`
-
-      function calculateTimeDifference(startTime, endTime) {
-         // Разбиваем строки времени на часы и минуты
-         const [startHours, startMinutes] = startTime.split(':').map(Number);
-         const [endHours, endMinutes] = endTime.split(':').map(Number);
-     
-         // Переводим время в минуты с начала дня
-         const startTotalMinutes = startHours * 60 + startMinutes;
-         const endTotalMinutes = endHours * 60 + endMinutes;
-     
-         // Проверяем, переходит ли время на следующий день
-         let diffMinutes;
-         if (endTotalMinutes > startTotalMinutes) {
-             // Если конечное время больше начального, просто вычисляем разницу
-             diffMinutes = endTotalMinutes - startTotalMinutes;
-         } else {
-             // Если конечное время меньше начального (переход через полночь)
-             diffMinutes = (24 * 60 - startTotalMinutes) + endTotalMinutes;
-         }
-     
-         // Переводим разницу обратно в часы и минуты
-         const hours = Math.floor(diffMinutes / 60);
-         const minutes = diffMinutes % 60;
-     
-         return { hours, minutes };
-     }
      
      const result = calculateTimeDifference(watchStart.value, watchEnd.value);
      let h, m
@@ -191,14 +191,14 @@ function makeWhatch() {
       h = `${result.hours} часов`
      }
 
-     if (result.minutes == 0) {
+     if (result.min == 0) {
       m = ``
-     } else if (result.minutes == 1) {
-      m = `${result.minutes} минута`
-     } else if (result.minutes < 5) {
-      m = `${result.minutes} минуты`
+     } else if (result.min == 1) {
+      m = `${result.min} минута`
+     } else if (result.min < 5) {
+      m = `${result.min} минуты`
      } else {
-      m = `${result.minutes} минут`
+      m = `${result.min} минут`
      }
      if (m.length && h.length) {
       h += ` `
@@ -504,9 +504,15 @@ function makeD() {
       let month = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', month: '2-digit' });
       let year = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', year: 'numeric' }).toString().substr(2,2);
 
+      let times = calculateTimeDifference(dStart.value,dEnd.value)
+
+if (times.hours.toString().length == 1) {
+   times.hours = '0'+times.hours
+}
+
       let dData = `[b]${day}.${month}.${year}[/b]`
 
-      let dHours = `Часы дозора: ${dStart.value} - ${dEnd.value}`
+      let dHours = `Часы дозора: ${dStart.value} - ${dEnd.value} (${times.hours}:${times.min})`
 
       let der = `Дозорный: [link${dIn.value}] [${dIn.value}]`
 
@@ -614,7 +620,7 @@ function makeDoc() {
       for (j = 1; j < part.length; j++) {
          let arr = part[j].split('+')
          players = players + `, [link${arr[0]}] [${arr[0]}] (+${arr[1]} `  
-         console.log(arr[1])
+         
          if (arr[1] == 1) {players += `мышь)`} else if (arr[1] < 5) {players += `мыши)`} else {players += `мышей)`}
       }
       }
@@ -835,41 +841,33 @@ let makeGrush = function() {
 
       let grushData = `${day}.${month}.${year}`
 
-      let start = grushStart.value.split(':'); let end = grushEnd.value.split(':')
-      let startInMinutes = start[0] * 60 + start[1] * 1;
-      let endInMinutes = end[0] * 60 + end[1] * 1;
-
-      let differenceInMinutes = endInMinutes - startInMinutes;
-
-// Переводим разницу в часы и минуты
-let hours = Math.floor(differenceInMinutes / 60);
-let min = differenceInMinutes % 60;
+      let times = calculateTimeDifference(grushStart.value,grushEnd.value)
 
       let time
-      if (hours == 1) {
-         time = `(${hours} час`
-      } else if (hours == 0) {
+      if (times.hours == 1) {
+         time = `(${times.hours} час`
+      } else if (times.hours == 0) {
          time = `(`
-      } else if (hours < 5) {
-         time = `(${hours} часа`
+      } else if (times.hours < 5) {
+         time = `(${times.hours} часа`
       } else {
-         time = `(${hours} часов`
+         time = `(${times.hours} часов`
       }
-      if (min == 0) {
+      if (times.min == 0) {
          time += `)`
-      } else if (min == 1 && !hours == 0) {
-         time += ` ${min} минута)`
-      } else if (min < 5 && min > 0 && !hours == 0) {
-         time += ` ${min} минуты)`
-      } else if (!hours == 0) {
-         time += ` ${min} минут)`
+      } else if (times.min == 1 && !times.hours == 0) {
+         time += ` ${times.min} минута)`
+      } else if (times.min < 5 && times.min > 0 && !times.hours == 0) {
+         time += ` ${times.min} минуты)`
+      } else if (!times.hours == 0) {
+         time += ` ${times.min} минут)`
       
-   } else if (min == 1 && hours == 0) {
-      time += `${min} минута)`
-   } else if (min < 5 && min > 0 && hours == 0) {
-      time += `${min} минуты)`
-   } else if (hours == 0) {
-      time += `${min} минут)`
+   } else if (times.min == 1 && times.hours == 0) {
+      time += `${times.min} минута)`
+   } else if (times.min < 5 && times.min > 0 && times.hours == 0) {
+      time += `${times.min} минуты)`
+   } else if (times.hours == 0) {
+      time += `${times.min} минут)`
    }
    
    grushReport.value = `[b]Грушевание[/b]\n${grushData}; ${grushStart.value} - ${grushEnd.value} ${time}\n[b]${grushRole.value}:[/b] [link${grushID.value}] [${grushID.value}] (${grushAge.value})`
