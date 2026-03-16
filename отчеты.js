@@ -509,6 +509,9 @@ function makeD() {
 if (times.hours.toString().length == 1) {
    times.hours = '0'+times.hours
 }
+if (times.min.toString().length == 1) {
+   times.min = '0'+times.min
+}
 
       let dData = `[b]${day}.${month}.${year}[/b]`
 
